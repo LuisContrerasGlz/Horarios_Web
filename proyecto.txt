@@ -1,0 +1,18 @@
+npm init -y          // crea el proyecto nodejs
+npm install express  //instala express (inicia package-lock.json y node-modules) 
+                     //para manejar rutas, peticiones y respuestas HTTP 
+npm install nodemon  //instala el servidor de desarrollo 
+npm install express-handlebars  // Handlebars.js es un motor de plantillas (template
+                                // engine) para JavaScript, especialmente usado con 
+                                // Node.js y Express, 
+                                // que permite generar HTML dinámico de forma clara y 
+                                // mantenible.
+npm install express-myconnection  // express-myconnection es un middleware para 
+                                  // Express.js que facilita la conexión a bases de 
+                                  // datos MySQL
+npm install mysql  //verificar su uso 
+npm install express-session  //express-session es un middleware para Express.js que 
+                             //permite gestionar sesiones de usuario en aplicaciones 
+                             //web.
+npm install body-parser  //body-parser es un middleware para Express.js que permite
+                         //leer y procesar el cuerpo (body) de las peticiones HTTP
