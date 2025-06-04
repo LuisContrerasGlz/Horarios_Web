@@ -16,3 +16,10 @@ npm install express-session  //express-session es un middleware para Express.js 
                              //web.
 npm install body-parser  //body-parser es un middleware para Express.js que permite
                          //leer y procesar el cuerpo (body) de las peticiones HTTP
+
+ npm install bcrypt      // 
+
+Super Administrador superAdm@gmail.com 0802 (SuperAdm)   // usuarios de prueba 
+Martin martin@gmail.com 0308 (Administrador)
+Bernardo bernardo@gmail.com 2007 (Capturista)
+Luis luis@gmail.com 2024 (Docente)
