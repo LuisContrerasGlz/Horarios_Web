@@ -1,5 +1,6 @@
 const bcrypt = require('bcrypt');
 const { render } = require('express/lib/response');
+const mysql = require('mysql');
 
 function renderManDocente(req, res){
     req.session.errorM = "";
@@ -106,143 +107,104 @@ function ediDocente(req, res) {
 }
 
 
-
-
 function manipulaDocente(req, res){
-    const data = req.body;
-    const idMod = req.session.id_usuario;
+    const {
+        id_docente,
+        rfc,
+        nombre,
+        appat,
+        apmat,
+        perfil,
+        correo_electronico,
+        telefono,
+        turno,
+        id_cct
+    } = req.body;
+    const usuario = req.session.dataCampos;
+    const error = req.session.errorM;
 
-    req.session.idEdi = idMod; 
-    let passIgual;
-
-    if (idMod){
-        if (data.password == "" && data.confPassword == ""){
-            passIgual = true;
-        }
-    }
-
-    if (!passIgual){
-        if (data.password !== data.confPassword) {
-            req.session.errorM = 'Error: La contraseña y la confirmación no coinciden';
-            req.session.dataCampos = data;
-            
-            if (idMod){
-                ediDocente(req, res);
-            }else{
-                manDocente(req, res);
-            }
-            return;
-        }
-    }
-    //conceccion con la base de datos
+    console.log("Formulario recibido:", req.body);
     req.getConnection((err, conn) => {
-        let consulta;
-        let parametros;
-
-        if (idMod){
-            consulta = 'SELECT * FROM usuario WHERE (correo_electronico = ? OR nombre = ? OR telefono = ?) AND id_usuario != ?';
-            parametros = [data.correo_electronico, data.nombre, data.telefono, idMod];
-        }else{
-            consulta = 'SELECT * FROM usuario WHERE correo_electronico = ? OR nombre = ? OR telefono = ?';
-            parametros = [data.correo_electronico, data.nombre, data.telefono];
+        if (err) {
+            console.log("Error en la conexión:", err);
+            return res.status(500).send("Error en la conexión");
         }
-        conn.query(consulta, parametros, (err, userdata) => {
-            if (userdata.length > 0) {
-                //console.log(userdata.length);
-                req.session.errorM = 'Error: El usuario ya existe o el correo o el teléfono ya existe!';
-                req.session.dataCampos = data;
-                if (idMod){
-                    ediDocente(req, res);
-                }else{
-                    manDocente(req, res);
+
+        // Verifica si se está editando o insertando
+        if (id_docente) {
+            // Editar docente existente
+            const sql = 'UPDATE docente SET RFC = ?, Nombre = ?, Apellido_pat = ?, Apellido_mat = ?, Perfil = ?, correo_e = ?, Telefono = ?, id_turno = ?, id_cct = ? WHERE id_docente = ?';
+            conn.query(sql, [rfc, nombre, appat, apmat, perfil, correo_electronico, telefono, turno, 1,  id_docente], (err) => {
+                if (err) {
+                    console.log("Error al actualizar docente:", err);
+                    return res.status(500).send("Error al actualizar docente");
                 }
-                return;
-            }else {
-                if (passIgual){
-                    req.getConnection((err, conn) => {
+                req.session.errorM = "Docente actualizado correctamente";
+                res.redirect('/manDocente');
+            });
+        } else {
+            // Insertar nuevo docente
+            const sql = 'INSERT INTO docente (RFC, Nombre, Apellido_pat, Apellido_mat, Perfil, correo_e, Telefono, id_turno, id_cct) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)';
+            const values = [rfc, nombre, appat, apmat, perfil, correo_electronico, telefono, turno, 1];
 
-                        // consulta para actualizar datos del administrador con la misma contraseña
-                        const consulta2 = 'UPDATE usuario SET nombre=?, correo_electronico=?, telefono=?, tipo_usuario=?, status=? WHERE id_usuario = ?';
-                        const parametros2 = [data.nombre, data.correo_electronico, data.telefono, 3, data.status, idMod];
+            // 👇 Aquí se imprime el query con los valores insertados
+            console.log("Query a ejecutar:", mysql.format(sql, values));
 
-                        conn.query(consulta2, parametros2, (err, rows) => {
-                            if (err) {
-                                console.error('Error al insertar:', err);
-                                req.session.errorM = 'Error: Al ingresar los datos!';
-                                manDocente(req, res);
-                            }
-                            renderManDocente(req, res); 
-                            return;
-                        });
-                    });
+            conn.query(sql, values, (err) => {
+            if (err) {
+                console.log("Error al insertar docente:", err);
+                return res.status(500).send("Error al insertar docente");
+            }
 
-                }else{
-                    let letras = /.{8,}/; // Al menos 8 caracteres
-                    let especialCaracter = /[^A-Za-z0-9]/; // Al menos 1 carácter especial
-                    let numero = /[0-9]/; // Al menos 1 número
-                    let mayuscula = /[A-Z]/; // Al menos 1 letra mayúscula
-                    let errorMensaje = "";
+            req.session.errorM = "Docente agregado correctamente";
+            res.redirect('/manDocente');
+            });
 
-                    if (!letras.test(data.password)) {
-                        errorMensaje += ` 8 caracteres.<br>`;
-                    }
-                    if (!especialCaracter.test(data.password)) {
-                        errorMensaje += `1 carácter especial.<br>`;
-                    }
-                    if (!numero.test(data.password)) {
-                        errorMensaje += ` 1 número.<br>`;
-                    }
-                    if (!mayuscula.test(data.password)) {
-                        errorMensaje += ` 1 letra mayúscula.<br>`;
-                    }
-                    if (errorMensaje !== "") {
-                        const errM = `La contraseña debe tener al menos.<br>` + errorMensaje;
-                            req.session.errorM = errM;
-                            req.session.dataCampos = data;  
-                        if (idMod){
-                            ediDocente(req, res);
-                        }else{
-                            manDocente(req, res);
-                        }    
-                        return;
-                    }else{
-                        bcrypt.hash(data.password, 12).then(hash => {
-                            data.password = hash;
-                            req.getConnection((err, conn) => {
-                                let consulta2;
-                                let parametros2;
-
-                                if (idMod){
-                                    // consulta para actualizar datos del administrador con la misma contraseña
-                                    consulta2 = 'UPDATE usuario SET nombre=?, correo_electronico=?, password=?, telefono=?, tipo_usuario=?, status=? WHERE id_usuario = ?';
-                                    parametros2 = [data.nombre, data.correo_electronico, data.password, data.telefono, 3,  data.status, idMod];
-                                }else{
-                                    // consulta para insertar datos nuevos del administrador 
-                                    consulta2 = 'INSERT INTO usuario (nombre, correo_electronico, password, telefono, tipo_usuario, status) VALUES (?, ?, ?, ?, ?, ?)';
-                                    parametros2 = [data.nombre, data.correo_electronico, data.password, data.telefono, 3, data.status];
-                                }
-                                    conn.query(consulta2, parametros2, (err, rows) => {
-                                        if (err) {
-                                            console.error('Error al insertar:', err);
-                                            req.session.errorM = 'Error: Al ingresar los datos!';
-                                            manDocente(req, res);
-                                        }
-                                        renderManDocente(req, res); 
-                                        return;
-                                    });
-                            });
-                        }); // termina hash
-                    }
-                } // termina la condicion si la contraseña se mantiene
-            };
-        });
+        }
     });
 }
+
+    function borDocente(req, res) {
+        const usuario = req.session.dataCampos;
+        const error = req.session.errorM;
+        const idDocente = req.query.id; // <-- Captura el id_docente desde la URL
+
+        if (!idDocente) {
+            return res.status(400).send("Falta el ID del docente");
+        }
+
+        req.getConnection((err, conn) => {
+            if (err) {
+                console.log("Error en la conexión:", err);
+                return res.status(500).send("Error en la conexión");
+            }
+
+            const sql = 'DELETE FROM docente WHERE id_docente = ?';
+            conn.query(sql, [idDocente], (err, result) => {
+                if (err) {
+                    console.log("Error al eliminar docente:", err);
+                    return res.status(500).send("Error al eliminar docente");
+                }
+
+                req.session.errorM = "Docente eliminado correctamente";
+                res.redirect('/manDocente');
+            });
+        });
+    }
+
+
+
+
+
+
+
+
 
 //para llamar a las funciones
 module.exports = {
     manDocente,
     ediDocente,
+    borDocente,
     manipulaDocente,
     renderManDocente,
 };

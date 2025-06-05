@@ -15,10 +15,34 @@ const manDocenteCotroller = require('./router/administrador/Docente/manDocenteR'
 const app = express();
 const PORT = 3000;
 
-const Handlebars = require('handlebars');
-Handlebars.registerHelper('isEqual', function(value1, value2, options) {
-    return value1 == value2 ? options.fn(this) : options.inverse(this);
+//const Handlebars = require('handlebars');
+//Handlebars.registerHelper('isEqual', function(value1, value2, options) {
+//    return value1 == value2 ? options.fn(this) : options.inverse(this);
+//});
+
+
+const exphbs = require('express-handlebars');
+
+const hbs = exphbs.create({
+  extname: '.hbs',
+  helpers: {
+    isEqual: (a, b, options) => {
+      return a == b ? options.fn(this) : options.inverse(this); // coerción simple
+    },
+    isEqualInt: (a, b) => {
+      return parseInt(a) === parseInt(b);
+    }
+  }
 });
+
+
+
+//app.engine('.hbs', engine({
+//    extname: '.hbs',
+//}));
+//app.set('view engine', 'hbs');
+
+
 
 // 🟢 Aquí está el middleware de sesión que faltaba:
 app.use(session({
@@ -36,6 +60,9 @@ app.use(myconnection(mysql, {
     database: 'sis_doc'
    }, 'single'));
 
+// 👇 Esta línea es necesaria para que funcione req.body con formularios HTML
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json()); // por si usas JSON en otras rutas
 
 app.use(express.static('public'));
 app.use(express.static(__dirname + '/public'));
@@ -45,9 +72,7 @@ app.use('/', manDocenteCotroller);
 
 
 app.set('views', __dirname + '/views');
-app.engine('.hbs', engine({
-    extname: '.hbs',
-}));
+app.engine('hbs', hbs.engine);
 app.set('view engine', 'hbs');
 
 app.use(bodyParser.urlencoded({ extended: true }));
