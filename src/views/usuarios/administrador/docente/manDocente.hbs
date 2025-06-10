@@ -25,13 +25,13 @@
                                     <th class="px-4 py-2 bg-gray-400 border border-b-2 border-gray-500">CORREO</th>
                                     <th class="px-4 py-2 bg-gray-400 border border-b-2 border-gray-500">TELEFONO</th>
                                     <th class="px-2 py-2 bg-gray-400 border border-b-2 border-gray-500">TURNO</th>
+                                    <th class="px-2 py-2 bg-gray-400 border border-b-2 border-gray-500">ESTATUS</th>
                                     <th class="px-2 py-2 bg-gray-400 border border-b-2 border-gray-500">EDITAR</th>
-                                    <th class="px-2 py-2 bg-gray-400 border border-b-2 border-gray-500">------</th>
-                                    <th class="px-2 py-2 bg-gray-400 border border-b-2 border-gray-500">------</th>
+                                    <th class="px-2 py-2 bg-gray-400 border border-b-2 border-gray-500">BORRAR</th>                                  
                                 </tr>
                             </thead>
                             <tbody>
-                                id {{datos.id_docente}}
+                                id {{datos.status}}
                                 {{#each datos}}
                                     <tr>
                                         <td class="px-4 py-2 bg-gray-100 border border-gray-600 text-center">{{this.RFC}}</td>
@@ -41,6 +41,7 @@
                                         <td class="px-4 py-2 bg-gray-100 border border-gray-600">{{this.correo_e}}</td>
                                         <td class="px-4 py-2 bg-gray-100 border border-gray-600">{{this.Telefono}}</td>
                                         <td class="px-4 py-2 bg-gray-100 border border-gray-600">{{this.turno}}</td>
+                                        <td class="px-4 py-2 bg-gray-100 border border-gray-600">{{this.status}}</td>
 
                                         <td class="px-4 py-2 bg-gray-100 border border-gray-600 text-center"><a href="/ediDocente?id={{this.id_docente}}"><svg class="h-8 w-10 text-gray-600"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4" />  <line x1="13.5" y1="6.5" x2="17.5" y2="10.5" /></svg></a></td>
 
@@ -58,7 +59,6 @@
                                         </a>
                                         </td>
 
-                                        <th class="px-2 py-2 bg-gray-400 border border-b-2 border-gray-500">------</th>
                                     </tr>
                                 {{/each}}
                             </tbody>
@@ -164,6 +164,24 @@
                                     <input type="text" name="perfil" class="border border-gray-200 w-full text-lg placeholder-gray-500 p-2 my-2 focus:bg-white hover:bg-gray-300 pr-10" placeholder="Usuario" id="perfil" pattern="[a-zA-Z0-9\s]+" title="No se permiten acentos ni caracteres especiales" required>
                                 {{/if}}  
                             </div>
+
+                            <div class="form-group">
+                                <label for="status"><i class="fas fa-user"></i> Estatus</label>
+                                <select id="status" name="status" class="border border-gray-200 w-full text-lg">
+                                    {{#each status}}
+                                        {{#if ../modificar}}
+                                            {{#if (isEqualInt this.id_status ../docente.id_status)}}
+                                                <option value="{{this.id_status}}" selected>{{this.descripcion}}</option>
+                                            {{else}}
+                                                <option value="{{this.id_status}}">{{this.descripcion}}</option>
+                                            {{/if}}
+                                        {{else}}
+                                            <option value="{{this.id_status}}">{{this.descripcion}}</option>
+                                        {{/if}}
+                                    {{/each}}
+                                </select>
+                            </div>
+                            <br>
 
                             {{#if error}}
                                 <h4 style="text-align: center; color: red;">*{{{error}}}</h4>
