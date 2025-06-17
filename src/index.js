@@ -11,6 +11,7 @@ const { redirect } = require('express/lib/response');
 //////////////////////////////////////////////////////////
 const loginRouter = require('./router/loginR');
 const manDocenteCotroller = require('./router/administrador/Docente/manDocenteR');
+const manMateriaCotroller = require('./router/administrador/materia/manMateriaR');
 
 const app = express();
 const PORT = 3000;
@@ -69,6 +70,7 @@ app.use(express.static(__dirname + '/public'));
 app.use(express.static('funciones'));
 app.use(express.static(__dirname + '/funciones'));
 app.use('/', manDocenteCotroller);
+app.use('/', manMateriaCotroller);
 
 
 app.set('views', __dirname + '/views');

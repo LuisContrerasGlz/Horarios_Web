@@ -25,6 +25,29 @@
             <h1 class="text-lg font-bold text-white hidden sm:block">SIHODOC</h1>
         </div>
 
+        
+        {{#if name}}
+            {{#isEqual tipoUsuario 2}}
+                <div class="relative">
+                    <button onclick="toggleCatalogos()" class="text-white bg-gray-700 hover:bg-gray-800 font-semibold py-2 px-4 rounded">
+                        Catálogos
+                    </button>
+                    <div id="dropdownCatalogos"
+                         class="hidden absolute left-0 mt-2 w-44 rounded-md shadow-lg bg-white z-50">
+                        <div class="py-1 flex flex-col">
+                            <a href="/renderManDocente"
+                               class="block px-4 py-2 text-gray-700 hover:bg-gray-300">Docentes</a>
+                            <a href="/renderManMateria"
+                               class="block px-4 py-2 text-gray-700 hover:bg-gray-300">Materias</a>
+                        </div>
+                    </div>
+                </div>
+            {{/isEqual}}
+        {{/if}}
+
+
+
+
         <!-- Menú de navegación -->
         <div class="relative inline-block text-left">
             <div>
@@ -43,10 +66,7 @@
                         <a href="/renderAdm" class="tracking-tighter inline-block rounded bg-neutral-800 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-neutral-50 shadow-dark-3 transition duration-150 ease-in-out hover:bg-neutral-700 hover:shadow-dark-2 focus:bg-neutral-700 focus:shadow-dark-2 focus:outline-none focus:ring-0 active:bg-neutral-900 active:shadow-dark-2 motion-reduce:transition-none dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong" role="menuitem">Administradores</a>
                     {{/isEqual}}
 
-                    {{#isEqual tipoUsuario 2}}
-                        <a href="/renderManDocente" class="block px-4 py-2 text-sm text-gray-700 hover:px-5 hover:py-3 hover:text-md hover:bg-gray-300 ease-in duration-200" role="menuitem">Docentes</a>
-                        <a href="/renderManPropiedad" class="block px-4 py-2 text-sm text-gray-700 hover:px-5 hover:py-3 hover:text-md hover:bg-gray-300 ease-in duration-200" role="menuitem">Materias</a>
-                    {{/isEqual}}
+
 
                     {{#isEqual tipoUsuario 3}}
                         <a href='/manIncidencia-{{id}}' class="block px-4 py-2 text-sm text-gray-700 hover:px-5 hover:py-3 hover:text-md hover:bg-gray-300 ease-in duration-200" role="menuitem">Incidencia</a>
@@ -67,6 +87,39 @@
     </nav>
 
     <!-- Contenido dinámico generado por la aplicación -->
+<script>
+  function toggleCatalogos() {
+    const menu = document.getElementById('dropdownCatalogos');
+    if (menu) {
+      menu.classList.toggle('hidden');
+    }
+  }
+
+  function toggleDropdown() {
+    const menu = document.getElementById('dropdownAvatar');
+    if (menu) {
+      menu.classList.toggle('hidden');
+    }
+  }
+
+        // Cierra los dropdowns si haces clic fuera
+        document.addEventListener('click', function (event) {
+            const catalogosBtn = document.querySelector('button[onclick="toggleCatalogos()"]');
+            const catalogosMenu = document.getElementById('dropdownCatalogos');
+            const avatarBtn = document.getElementById('dropdownUserAvatarButton');
+            const avatarMenu = document.getElementById('dropdownAvatar');
+
+            if (catalogosBtn && catalogosMenu && !catalogosBtn.contains(event.target) && !catalogosMenu.contains(event.target)) {
+            catalogosMenu.classList.add('hidden');
+            }
+
+            if (avatarBtn && avatarMenu && !avatarBtn.contains(event.target) && !avatarMenu.contains(event.target)) {
+            avatarMenu.classList.add('hidden');
+            }
+        });
+        </script>
+
+
     {{{body}}}
 </div>
 

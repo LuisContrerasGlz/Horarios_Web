@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 03-06-2025 a las 00:36:20
+-- Tiempo de generación: 13-06-2025 a las 22:40:04
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.1.17
 
@@ -24,316 +24,14 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `calificacion`
+-- Estructura de tabla para la tabla `academia`
 --
 
-CREATE TABLE `calificacion` (
-  `usuario` varchar(20) NOT NULL,
-  `Apellido` varchar(100) NOT NULL,
-  `Nombre` varchar(100) NOT NULL,
-  `Calificacion` float NOT NULL,
-  `guia` int(11) NOT NULL
+CREATE TABLE `academia` (
+  `id_academia` int(11) NOT NULL,
+  `nombre` varchar(100) NOT NULL,
+  `nombre_corto` int(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `calificacion`
---
-
-INSERT INTO `calificacion` (`usuario`, `Apellido`, `Nombre`, `Calificacion`, `guia`) VALUES
-('C155G230065', 'Cazabal Peña', 'Camila Hanna', 10, 1),
-('C155G230065', 'Cazabal Peña', 'Camila Hanna', 10, 1),
-('C155G230065', 'Cazabal Peña', 'Camila Hanna', 10, 1),
-('C155G230065', 'Cazabal Peña', 'Camila Hanna', 10, 1),
-('C155G230089', 'Garcia Becerra', 'Eduardo', 0, 1),
-('C155G230089', 'Garcia Becerra', 'Eduardo', 10, 1),
-('C155G230095', 'Hernandez Lara', 'Cristian Aaron', 0, 1),
-('C155G230104', 'Montes Rivera', 'Andrea Ximena', 0, 1),
-('C155G230106', 'MORIN CARRASCO', 'FATIMA ALEJANDRA', 0, 1),
-('C155G230057', 'Arguelles Franco', 'Fatima', 8.79518, 1),
-('C155G230057', 'Arguelles Franco', 'Fatima', 7.3494, 1),
-('C155G230060', 'Casillas Castruita', 'Angel Eduardo', 6.50602, 1),
-('C155G230060', 'Casillas Castruita', 'Angel Eduardo', 8.43373, 1),
-('C155G230065', 'Cazabal Peña', 'Camila Hanna', 9.39759, 1),
-('C155G230065', 'Cazabal Peña', 'Camila Hanna', 9.75904, 1),
-('C155G230065', 'Cazabal Peña', 'Camila Hanna', 10, 1),
-('C155G230065', 'Cazabal Peña', 'Camila Hanna', 9.75904, 1),
-('C155G230065', 'Cazabal Peña', 'Camila Hanna', 9.63855, 1),
-('C155G230065', 'Cazabal Peña', 'Camila Hanna', 9.75904, 1),
-('C155G230065', 'Cazabal Peña', 'Camila Hanna', 9.63855, 1),
-('C155G230065', 'Cazabal Peña', 'Camila Hanna', 10, 1),
-('C155G230065', 'Cazabal Peña', 'Camila Hanna', 10, 1),
-('C155G230065', 'Cazabal Peña', 'Camila Hanna', 10, 1),
-('C155G230070', 'Chavez Luevano', 'Yared Guadalupe', 8.43373, 1),
-('C155G230073', 'CHAVEZ SANCHEZ', 'JUAN JOSE', 5.3012, 1),
-('C155G230073', 'CHAVEZ SANCHEZ', 'JUAN JOSE', 9.63855, 1),
-('C155G230073', 'CHAVEZ SANCHEZ', 'JUAN JOSE', 9.15663, 1),
-('C155G230588', 'cordova bautista', 'nahomi', 7.95181, 1),
-('C155G230087', 'Elias Vivero', 'Erick Santiago', 2.6506, 1),
-('C155G230088', 'Flores Lugo', 'Diego Niam', 6.38554, 1),
-('C155G230089', 'Garcia Becerra', 'Eduardo', 0, 1),
-('C155G230089', 'Garcia Becerra', 'Eduardo', 10, 1),
-('C155G230090', 'gonzalez garcia', 'karol cristana', 6.14458, 1),
-('C155G230090', 'gonzalez garcia', 'karol cristana', 9.27711, 1),
-('C155G230585', 'GONZALEZ MARTINEZ', 'DALILA AIDEE', 1.08434, 1),
-('C155G230585', 'GONZALEZ MARTINEZ', 'DALILA AIDEE', 7.71084, 1),
-('C155G230585', 'GONZALEZ MARTINEZ', 'DALILA AIDEE', 2.16867, 1),
-('C155G230091', 'gonzalez quiñones', 'jorge eloy', 2.40964, 1),
-('C155G230093', 'Guerrero Basurto', 'Karen Nicole', 6.38554, 1),
-('C155G230093', 'Guerrero Basurto', 'Karen Nicole', 1.20482, 1),
-('C155G230094', 'GUZMAN MARTINEZ', 'ALEXIS', 5.90361, 1),
-('C155G230095', 'Hernandez Lara', 'Cristian Aaron', 0, 1),
-('C155G230096', 'Lariz Altamira', 'Aarón Alexander', 8.6747, 1),
-('C155G230096', 'Lariz Altamira', 'Aarón Alexander', 9.51807, 1),
-('C155G230098', 'madrid ponce', 'emiliano', 3.85542, 1),
-('C155G230100', 'MARTINEZ WONG', 'WENDY NAOMI', 9.15663, 1),
-('C155G230100', 'MARTINEZ WONG', 'WENDY NAOMI', 9.39759, 1),
-('C155G230100', 'MARTINEZ WONG', 'WENDY NAOMI', 9.39759, 1),
-('C155G230103', 'melendez gonzalez', 'leonardo ari', 0.60241, 1),
-('C155G230104', 'Montes Rivera', 'Andrea Ximena', 6.26506, 1),
-('C155G230104', 'Montes Rivera', 'Andrea Ximena', 0, 1),
-('C155G230116', 'Morales Gutiérrez', 'Yunnuen', 0.120482, 1),
-('C155G230106', 'MORIN CARRASCO', 'FATIMA ALEJANDRA', 8.19277, 1),
-('C155G230106', 'MORIN CARRASCO', 'FATIMA ALEJANDRA', 9.27711, 1),
-('C155G230106', 'MORIN CARRASCO', 'FATIMA ALEJANDRA', 5.90361, 1),
-('C155G230106', 'MORIN CARRASCO', 'FATIMA ALEJANDRA', 0, 1),
-('C155G230108', 'Pedroza López', 'Rubén Emmanuel', 7.22892, 1),
-('C155G230108', 'Pedroza López', 'Rubén Emmanuel', 8.79518, 1),
-('C155G230108', 'Pedroza López', 'Rubén Emmanuel', 7.95181, 1),
-('C155G230108', 'Pedroza López', 'Rubén Emmanuel', 9.27711, 1),
-('C155G230110', 'piña coronel', 'Jose Emiliano', 4.09639, 1),
-('C155G230110', 'piña coronel', 'Jose Emiliano', 0, 1),
-('C155G230112', 'PORTILLA RANGEL', 'DIEGO LEONARDO', 5.3012, 1),
-('C155G230112', 'PORTILLA RANGEL', 'DIEGO LEONARDO', 8.79518, 1),
-('C155G231028', 'Quiroz Nava', 'Kenia Hazarmavet', 5.54217, 1),
-('C155G231028', 'Quiroz Nava', 'Kenia Hazarmavet', 9.15663, 1),
-('C155G231028', 'Quiroz Nava', 'Kenia Hazarmavet', 1.20482, 1),
-('C155G230114', 'REVELES VILLALOBOS', 'KAROL JSOSELIN', 7.83133, 1),
-('C155G230114', 'REVELES VILLALOBOS', 'KAROL JSOSELIN', 8.55422, 1),
-('C155G230114', 'REVELES VILLALOBOS', 'KAROL JSOSELIN', 10, 1),
-('C155G230117', 'Reyes Avila', 'Diana', 9.27711, 1),
-('C155G230580', 'Reynaga Avila', 'Mariana Judith', 6.38554, 1),
-('C155G230580', 'Reynaga Avila', 'Mariana Judith', 9.39759, 1),
-('C155G230120', 'Rivera Zamora', 'Andree Leonardo', 9.75904, 1),
-('C155G230122', 'Rocha Cortes', 'Jose Eduardo', 9.51807, 1),
-('C155G230122', 'Rocha Cortes', 'Jose Eduardo', 9.39759, 1),
-('C155G230122', 'Rocha Cortes', 'Jose Eduardo', 9.75904, 1),
-('C155G230122', 'Rocha Cortes', 'Jose Eduardo', 1.20482, 1),
-('C155G220200', 'Ruiz Clemente', 'Alexander Ivanov', 6.98795, 1),
-('C155G220200', 'Ruiz Clemente', 'Alexander Ivanov', 7.83133, 1),
-('C155G230126', 'Sanchez Pedroza', 'Jose Miguel', 8.55422, 1),
-('C155G230126', 'Sanchez Pedroza', 'Jose Miguel', 8.6747, 1),
-('C155G230455', 'serrano ventura', 'America jazbet', 8.6747, 1),
-('C155G230455', 'serrano ventura', 'America jazbet', 8.55422, 1),
-('C155G230455', 'serrano ventura', 'America jazbet', 8.79518, 1),
-('C155G230455', 'serrano ventura', 'America jazbet', 9.15663, 1),
-('C155G230455', 'serrano ventura', 'America jazbet', 9.39759, 1),
-('C155G230455', 'serrano ventura', 'America jazbet', 4.21687, 1),
-('C155G230130', 'Soto Loera', 'Gael Axel', 0, 1),
-('C155G230130', 'Soto Loera', 'Gael Axel', 0, 1),
-('C155G230133', 'Tovar Velasco', 'Karol Gabriel', 2.40964, 1),
-('C155G230134', 'Vazquez Ricardez', 'Alan Joseph', 8.6747, 1),
-('C155G230134', 'Vazquez Ricardez', 'Alan Joseph', 8.31325, 1),
-('C155G230134', 'Vazquez Ricardez', 'Alan Joseph', 7.71084, 1),
-('C155G230135', 'Vela Ibarra', 'Itzel Montserrath', 6.62651, 1),
-('C155G230136', 'veloz castañeda', 'Ana Elizabeth', 7.46988, 1),
-('C155G230137', 'Viramontes Alfaro', 'Daniel', 8.07229, 1),
-('C155G230137', 'Viramontes Alfaro', 'Daniel', 8.79518, 1),
-('C155G230137', 'Viramontes Alfaro', 'Daniel', 8.31325, 1),
-('C155G230137', 'Viramontes Alfaro', 'Daniel', 7.71084, 1),
-('C155G230137', 'Viramontes Alfaro', 'Daniel', 8.91566, 1),
-('C155G230137', 'Viramontes Alfaro', 'Daniel', 8.91566, 1),
-('C155G230137', 'Viramontes Alfaro', 'Daniel', 10, 1),
-('C155G230138', 'Yanes Salazar', 'Eduardo', 2.04819, 1),
-('C155G230138', 'Yanes Salazar', 'Eduardo', 7.3494, 1),
-('C155G230138', 'Yanes Salazar', 'Eduardo', 1.68675, 1),
-('C155G230138', 'Yanes Salazar', 'Eduardo', 4.45783, 1),
-('C155G230138', 'Yanes Salazar', 'Eduardo', 8.79518, 1),
-('C155G230138', 'Yanes Salazar', 'Eduardo', 8.55422, 1),
-('C155G230138', 'Yanes Salazar', 'Eduardo', 0.722892, 1),
-('C155G230002', 'Acevedo Loera', 'Omar Alexey', 8.34469, 2),
-('C155G230057', 'Arguelles Franco', 'Fatima', 8.24732, 2),
-('C155G230057', 'Arguelles Franco', 'Fatima', 7.46835, 2),
-('C155G230057', 'Arguelles Franco', 'Fatima', 7.6631, 2),
-('C155G230057', 'Arguelles Franco', 'Fatima', 7.56573, 2),
-('C155G230057', 'Arguelles Franco', 'Fatima', 1.36319, 2),
-('C155G230060', 'Casillas Castruita', 'Angel Eduardo', 8.83155, 2),
-('C155G230060', 'Casillas Castruita', 'Angel Eduardo', 0, 2),
-('C155G230065', 'Cazabal Peña', 'Camila Hanna', 9.12366, 2),
-('C155G230065', 'Cazabal Peña', 'Camila Hanna', 9.41577, 2),
-('C155G230065', 'Cazabal Peña', 'Camila Hanna', 8.92892, 2),
-('C155G230065', 'Cazabal Peña', 'Camila Hanna', 9.11392, 2),
-('C155G230065', 'Cazabal Peña', 'Camila Hanna', 9.22103, 2),
-('C155G230065', 'Cazabal Peña', 'Camila Hanna', 9.22103, 2),
-('C155G230065', 'Cazabal Peña', 'Camila Hanna', 9.22103, 2),
-('C155G230065', 'Cazabal Peña', 'Camila Hanna', 8.92892, 2),
-('C155G230065', 'Cazabal Peña', 'Camila Hanna', 9.12366, 2),
-('C155G230065', 'Cazabal Peña', 'Camila Hanna', 9.22103, 2),
-('C155G230070', 'Chavez Luevano', 'Yared Guadalupe', 3.37877, 2),
-('C155G230073', 'CHAVEZ SANCHEZ', 'JUAN JOSE', 8.63681, 2),
-('C155G230073', 'CHAVEZ SANCHEZ', 'JUAN JOSE', 0, 2),
-('C155G230073', 'CHAVEZ SANCHEZ', 'JUAN JOSE', 9.22103, 2),
-('C155G230588', 'cordova bautista', 'nahomi', 9.80526, 2),
-('C155G230588', 'cordova bautista', 'nahomi', 0.778968, 2),
-('C155G230087', 'Elias Vivero', 'Erick Santiago', 9.51315, 2),
-('C155G230088', 'Flores Lugo', 'Diego Niam', 9.41577, 2),
-('C155G230088', 'Flores Lugo', 'Diego Niam', 8.92892, 2),
-('C155G230088', 'Flores Lugo', 'Diego Niam', 9.02629, 2),
-('C155G230089', 'Garcia Becerra', 'Eduardo', 8.72444, 2),
-('C155G230090', 'gonzalez garcia', 'karol cristana', 8.14995, 2),
-('C155G230090', 'gonzalez garcia', 'karol cristana', 8.83155, 2),
-('C155G230090', 'gonzalez garcia', 'karol cristana', 9.02629, 2),
-('C155G230090', 'gonzalez garcia', 'karol cristana', 8.73418, 2),
-('C155G230090', 'gonzalez garcia', 'karol cristana', 8.7147, 2),
-('C155G230585', 'GONZALEZ MARTINEZ', 'DALILA AIDEE', 9.3184, 2),
-('C155G230585', 'GONZALEZ MARTINEZ', 'DALILA AIDEE', 0, 2),
-('C155G230091', 'gonzalez quiñones', 'jorge eloy', 7.95521, 2),
-('C155G230091', 'gonzalez quiñones', 'jorge eloy', 0, 2),
-('C155G230091', 'gonzalez quiñones', 'jorge eloy', 7.26388, 2),
-('C155G230091', 'gonzalez quiñones', 'jorge eloy', 0, 2),
-('C155G230091', 'gonzalez quiñones', 'jorge eloy', 0, 2),
-('C155G230093', 'Guerrero Basurto', 'Karen Nicole', 8.51996, 2),
-('C155G230094', 'GUZMAN MARTINEZ', 'ALEXIS', 9.22103, 2),
-('C155G230096', 'Lariz Altamira', 'Aarón Alexander', 8.83155, 2),
-('C155G230098', 'madrid ponce', 'emiliano', 8.73418, 2),
-('C155G230098', 'madrid ponce', 'emiliano', 8.92892, 2),
-('C155G230098', 'madrid ponce', 'emiliano', 0, 2),
-('C155G230100', 'MARTINEZ WONG', 'WENDY NAOMI', 9.12366, 2),
-('C155G230100', 'MARTINEZ WONG', 'WENDY NAOMI', 9.22103, 2),
-('C155G230102', 'MEDINA TORRES', 'AXEL AROLDO', 9.02629, 2),
-('C155G230102', 'MEDINA TORRES', 'AXEL AROLDO', 1.94742, 2),
-('C155G230103', 'melendez gonzalez', 'leonardo ari', 8.73418, 2),
-('C155G230103', 'melendez gonzalez', 'leonardo ari', 9.12366, 2),
-('C155G230104', 'Montes Rivera', 'Andrea Ximena', 7.76047, 2),
-('C155G230104', 'Montes Rivera', 'Andrea Ximena', 0, 2),
-('C155G230106', 'MORIN CARRASCO', 'FATIMA ALEJANDRA', 8.82181, 2),
-('C155G230106', 'MORIN CARRASCO', 'FATIMA ALEJANDRA', 8.72444, 2),
-('C155G230106', 'MORIN CARRASCO', 'FATIMA ALEJANDRA', 9.11392, 2),
-('C155G230106', 'MORIN CARRASCO', 'FATIMA ALEJANDRA', 9.2113, 2),
-('C155G230108', 'Pedroza López', 'Rubén Emmanuel', 8.92892, 2),
-('C155G230108', 'Pedroza López', 'Rubén Emmanuel', 9.02629, 2),
-('C155G230110', 'piña coronel', 'Jose Emiliano', 9.12366, 2),
-('C155G230112', 'PORTILLA RANGEL', 'DIEGO LEONARDO', 9.3184, 2),
-('C155G231028', 'Quiroz Nava', 'Kenia Hazarmavet', 9.2113, 2),
-('C155G231028', 'Quiroz Nava', 'Kenia Hazarmavet', 9.2113, 2),
-('C155G230114', 'REVELES VILLALOBOS', 'KAROL JSOSELIN', 8.34469, 2),
-('C155G230114', 'REVELES VILLALOBOS', 'KAROL JSOSELIN', 8.92892, 2),
-('C155G230114', 'REVELES VILLALOBOS', 'KAROL JSOSELIN', 8.63681, 2),
-('C155G230117', 'Reyes Avila', 'Diana', 9.3184, 2),
-('C155G230117', 'Reyes Avila', 'Diana', 9.51315, 2),
-('C155G230580', 'Reynaga Avila', 'Mariana Judith', 9.02629, 2),
-('C155G230580', 'Reynaga Avila', 'Mariana Judith', 8.83155, 2),
-('C155G230580', 'Reynaga Avila', 'Mariana Judith', 8.83155, 2),
-('C155G230120', 'Rivera Zamora', 'Andree Leonardo', 0, 2),
-('C155G230122', 'Rocha Cortes', 'Jose Eduardo', 8.53944, 2),
-('C155G230122', 'Rocha Cortes', 'Jose Eduardo', 9.41577, 2),
-('C155G230122', 'Rocha Cortes', 'Jose Eduardo', 8.92892, 2),
-('C155G220200', 'Ruiz Clemente', 'Alexander Ivanov', 8.44206, 2),
-('C155G220200', 'Ruiz Clemente', 'Alexander Ivanov', 9.22103, 2),
-('C155G230126', 'Sanchez Pedroza', 'Jose Miguel', 8.34469, 2),
-('C155G230455', 'serrano ventura', 'America jazbet', 8.03311, 2),
-('C155G230455', 'serrano ventura', 'America jazbet', 9.38656, 2),
-('C155G230455', 'serrano ventura', 'America jazbet', 9.00682, 2),
-('C155G230455', 'serrano ventura', 'America jazbet', 9.29893, 2),
-('C155G230455', 'serrano ventura', 'America jazbet', 9.00682, 2),
-('C155G230455', 'serrano ventura', 'America jazbet', 7.07887, 2),
-('C155G230132', 'TORRES GUZMAN', 'DIEGO AARON', 0, 2),
-('C155G230133', 'Tovar Velasco', 'Karol Gabriel', 7.37098, 2),
-('C155G230133', 'Tovar Velasco', 'Karol Gabriel', 0.876339, 2),
-('C155G230134', 'Vazquez Ricardez', 'Alan Joseph', 7.56573, 2),
-('C155G230134', 'Vazquez Ricardez', 'Alan Joseph', 9.01655, 2),
-('C155G230134', 'Vazquez Ricardez', 'Alan Joseph', 8.05258, 2),
-('C155G230135', 'Vela Ibarra', 'Itzel Montserrath', 7.64362, 2),
-('C155G230135', 'Vela Ibarra', 'Itzel Montserrath', 6.10516, 2),
-('C155G230135', 'Vela Ibarra', 'Itzel Montserrath', 7.46835, 2),
-('C155G230135', 'Vela Ibarra', 'Itzel Montserrath', 6.00779, 2),
-('C155G230135', 'Vela Ibarra', 'Itzel Montserrath', 0.457644, 2),
-('C155G230136', 'veloz castañeda', 'Ana Elizabeth', 8.63681, 2),
-('C155G230136', 'veloz castañeda', 'Ana Elizabeth', 0, 2),
-('C155G230137', 'Viramontes Alfaro', 'Daniel', 9.22103, 2),
-('C155G230137', 'Viramontes Alfaro', 'Daniel', 8.92892, 2),
-('C155G230137', 'Viramontes Alfaro', 'Daniel', 9.20156, 2),
-('C155G230138', 'Yanes Salazar', 'Eduardo', 9.41577, 2),
-('C155G230138', 'Yanes Salazar', 'Eduardo', 9.41577, 2),
-('C155G230138', 'Yanes Salazar', 'Eduardo', 8.92892, 2),
-('C155G230138', 'Yanes Salazar', 'Eduardo', 9.2113, 2),
-('C155G230138', 'Yanes Salazar', 'Eduardo', 9.12366, 2),
-('C155G230114', 'REVELES VILLALOBOS', 'KAROL JSOSELIN', 7.58281, 3),
-('C155G230065', 'Cazabal Peña', 'Camila Hanna', 9.37332, 3),
-('C155G230138', 'Yanes Salazar', 'Eduardo', 2.82901, 3),
-('C155G230134', 'Vazquez Ricardez', 'Alan Joseph', 8.47807, 3),
-('C155G230137', 'Viramontes Alfaro', 'Daniel', 9.01522, 3),
-('C155G230135', 'Vela Ibarra', 'Itzel Montserrath', 6.86661, 3),
-('C155G230070', 'Chavez Luevano', 'Yared Guadalupe', 0, 3),
-('C155G230108', 'Pedroza López', 'Rubén Emmanuel', 9.2838, 3),
-('C155G230455', 'serrano ventura', 'America jazbet', 8.37064, 3),
-('C155G230122', 'Rocha Cortes', 'Jose Eduardo', 8.20949, 3),
-('C155G230096', 'Lariz Altamira', 'Aarón Alexander', 8.29902, 3),
-('C155G231028', 'Quiroz Nava', 'Kenia Hazarmavet', 9.37332, 3),
-('C155G230060', 'Casillas Castruita', 'Angel Eduardo', 9.37332, 3),
-('C155G230073', 'CHAVEZ SANCHEZ', 'JUAN JOSE', 8.47807, 3),
-('C155G230093', 'Guerrero Basurto', 'Karen Nicole', 8.00358, 3),
-('C155G230088', 'Flores Lugo', 'Diego Niam', 7.67234, 3),
-('C155G220200', 'Ruiz Clemente', 'Alexander Ivanov', 9.46285, 3),
-('C155G230138', 'Yanes Salazar', 'Eduardo', 9.10474, 3),
-('C155G230094', 'GUZMAN MARTINEZ', 'ALEXIS', 9.73142, 3),
-('C155G230090', 'gonzalez garcia', 'karol cristana', 8.65712, 3),
-('C155G230580', 'Reynaga Avila', 'Mariana Judith', 9.2838, 3),
-('C155G230098', 'madrid ponce', 'emiliano', 9.37332, 3),
-('C155G230088', 'Flores Lugo', 'Diego Niam', 8.83617, 3),
-('C155G230057', 'Arguelles Franco', 'Fatima', 8.19158, 3),
-('C155G230102', 'MEDINA TORRES', 'AXEL AROLDO', 9.46285, 3),
-('C155G230133', 'Tovar Velasco', 'Karol Gabriel', 9.46285, 3),
-('C155G230065', 'Cazabal Peña', 'Camila Hanna', 9.6419, 3),
-('C155G230588', 'cordova bautista', 'nahomi', 10, 3),
-('C155G230100', 'MARTINEZ WONG', 'WENDY NAOMI', 9.73142, 3),
-('C155G230106', 'MORIN CARRASCO', 'FATIMA ALEJANDRA', 7.22471, 3),
-('C155G230087', 'Elias Vivero', 'Erick Santiago', 9.82095, 3),
-('C155G230585', 'GONZALEZ MARTINEZ', 'DALILA AIDEE', 9.812, 3),
-('C155G230455', 'serrano ventura', 'America jazbet', 8.81826, 3),
-('C155G230065', 'Cazabal Peña', 'Camila Hanna', 9.6419, 3),
-('C155G230102', 'MEDINA TORRES', 'AXEL AROLDO', 6.06088, 3),
-('C155G230057', 'Arguelles Franco', 'Fatima', 8.55864, 3),
-('C155G230090', 'gonzalez garcia', 'karol cristana', 8.92569, 3),
-('C155G230138', 'Yanes Salazar', 'Eduardo', 9.10474, 3),
-('C155G230135', 'Vela Ibarra', 'Itzel Montserrath', 7.92301, 3),
-('C155G230122', 'Rocha Cortes', 'Jose Eduardo', 8.11996, 3),
-('C155G230580', 'Reynaga Avila', 'Mariana Judith', 9.26589, 3),
-('C155G230065', 'Cazabal Peña', 'Camila Hanna', 9.6419, 3),
-('C155G230102', 'MEDINA TORRES', 'AXEL AROLDO', 9.10474, 3),
-('C155G230098', 'madrid ponce', 'emiliano', 6.68756, 3),
-('C155G230088', 'Flores Lugo', 'Diego Niam', 8.74664, 3),
-('C155G230136', 'veloz castañeda', 'Ana Elizabeth', 7.85139, 3),
-('C155G230057', 'Arguelles Franco', 'Fatima', 7.22471, 3),
-('C155G230138', 'Yanes Salazar', 'Eduardo', 9.2838, 3),
-('C155G230090', 'gonzalez garcia', 'karol cristana', 8.99731, 3),
-('C155G230065', 'Cazabal Peña', 'Camila Hanna', 9.63295, 3),
-('C155G230455', 'serrano ventura', 'America jazbet', 8.63921, 3),
-('C155G230588', 'cordova bautista', 'nahomi', 0, 3),
-('C155G230580', 'Reynaga Avila', 'Mariana Judith', 9.2838, 3),
-('C155G230095', 'Hernandez Lara', 'Cristian Aaron', 7.84243, 3),
-('C155G230100', 'MARTINEZ WONG', 'WENDY NAOMI', 0, 3),
-('C155G230065', 'Cazabal Peña', 'Camila Hanna', 9.6419, 3),
-('C155G230102', 'MEDINA TORRES', 'AXEL AROLDO', 6.1504, 3),
-('C155G230135', 'Vela Ibarra', 'Itzel Montserrath', 6.68756, 3),
-('C155G230065', 'Cazabal Peña', 'Camila Hanna', 9.6419, 3),
-('C155G230106', 'MORIN CARRASCO', 'FATIMA ALEJANDRA', 0.814682, 3),
-('C155G230122', 'Rocha Cortes', 'Jose Eduardo', 0, 3),
-('C155G230065', 'Cazabal Peña', 'Camila Hanna', 9.46285, 3),
-('C155G230455', 'serrano ventura', 'America jazbet', 8.54969, 3),
-('C155G230098', 'madrid ponce', 'emiliano', 8.83617, 3),
-('C155G230104', 'Montes Rivera', 'Andrea Ximena', 5.46106, 3),
-('C155G230087', 'Elias Vivero', 'Erick Santiago', 1.70098, 3),
-('C155G230065', 'Cazabal Peña', 'Camila Hanna', 9.6419, 3),
-('C155G230117', 'Reyes Avila', 'Diana', 8.65712, 3),
-('C155G230090', 'gonzalez garcia', 'karol cristana', 7.02775, 3),
-('C155G230580', 'Reynaga Avila', 'Mariana Judith', 9.19427, 3),
-('C155G230095', 'Hernandez Lara', 'Cristian Aaron', 8.00358, 3),
-('C155G230065', 'Cazabal Peña', 'Camila Hanna', 9.55237, 3),
-('C155G230090', 'gonzalez garcia', 'karol cristana', 8.65712, 3),
-('C155G230455', 'serrano ventura', 'America jazbet', 0, 3),
-('C155G230103', 'melendez gonzalez', 'leonardo ari', 2.86482, 3),
-('C155G230128', 'segura catalan', 'neri isair', 1.79051, 3),
-('C155G230110', 'piña coronel', 'Jose Emiliano', 8.45121, 3);
 
 -- --------------------------------------------------------
 
@@ -365,13 +63,170 @@ CREATE TABLE `docente` (
   `RFC` varchar(13) NOT NULL,
   `Nombre` varchar(100) NOT NULL,
   `Apellido_pat` varchar(100) NOT NULL,
-  `Apellido_mat` varchar(100) NOT NULL,
-  `Perfil` text NOT NULL,
-  `correo_e` varchar(100) NOT NULL,
-  `Telefono` varchar(100) NOT NULL,
+  `Apellido_mat` varchar(100) DEFAULT NULL,
+  `Perfil` text DEFAULT NULL,
+  `correo_e` varchar(100) DEFAULT NULL,
+  `Telefono` varchar(100) DEFAULT NULL,
   `id_turno` int(11) NOT NULL,
-  `id_cct` int(11) NOT NULL
+  `id_cct` int(11) NOT NULL,
+  `id_status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `docente`
+--
+
+INSERT INTO `docente` (`id_docente`, `RFC`, `Nombre`, `Apellido_pat`, `Apellido_mat`, `Perfil`, `correo_e`, `Telefono`, `id_turno`, `id_cct`, `id_status`) VALUES
+(1, 'AAMP600211E43', 'PEDRO', 'ALCALA', 'MARTINEZ', 'M', 'alcalapedro@hotmail.com', '4491514748', 1, 1, 1),
+(2, 'AEDL710625ST0', 'LUZ AURORA', 'ALENCASTRO', 'DURON', 'I', 'e_dusa@hotmail.com', '4491099168', 3, 1, 1),
+(3, 'BAMC7409035Q3', 'CARMEN ROSALBA', 'BARBA', 'MACIAS', 'I', 'rosalba.barba@hotmail.com', '4491141784', 3, 1, 1),
+(4, 'COMA5812092Z5', 'ARTURO', 'CORONA', 'MONTES', 'M', 'anlope85@hotmail.com', '4492321141', 1, 1, 1),
+(5, 'DIVG880109DG9', 'GERARDO JESUS', 'DIAZ', 'VELA', 'V', 'gerardo.diaz.vela@gmail.com', '4492094476', 2, 1, 1),
+(6, 'DILM771216LS9', 'MARCELA ESTHELA', 'DIAZ', 'LIMON', 'M', 'markiela3012@hotmail.com', '', 1, 1, 1),
+(7, 'DOLP721020I52', 'PEDRO', 'DOMINGUEZ', 'LOPEZ', 'M', 'yopedro72@live.com.mx', '', 1, 1, 1),
+(8, 'DUME680417TW0', 'ELBA ELIZABETH', 'DURON', 'MACIAS', 'I', 'eliz_duron@yahoo.com.mx', '', 3, 1, 1),
+(9, 'LOOF691212ECA', 'FABIOLA GUADALUPE', 'LOPEZ', 'OCHOA', 'M', 'fabilupis@yahoo.com.mx', '4491094794', 1, 1, 1),
+(10, 'BACM8210133S9', 'MARTHA ELIZABETH', 'BRAMBILA', 'CASTILLO', 'M', 'vicky23222008@hotmail.com', '', 1, 1, 1),
+(11, 'MEGG690303RM4', 'MA. GUADALUPE', 'MENDOZA', 'GONZALEZ', 'V', 'mendozgl@gmail.com', '', 2, 1, 1),
+(12, 'MOAL6303017G8', 'MA. LETICIA', 'MORALES', 'ACOSTA', 'I', 'mariel_shell@hotmail.com', '4491787136', 3, 1, 1),
+(13, 'MOEU640726VB1', 'URIEL', 'MORALES', 'ELIAS', 'M', 'urimoraeli@hotmail.com', '4491378997', 1, 1, 1),
+(15, 'JAPA8009252M9', 'AMIRA', 'J UREGUI', 'P REZ', 'V', 'eriosparra@yahoo.com.mx', '', 2, 1, 1),
+(16, 'ROSP820128EC7', 'PAMELA VIRIDIANA', 'ROBLEDO', 'SAMANO', 'M', 'pamikitty@hotmail.com', '', 1, 1, 1),
+(17, 'CAMJ840102S86', 'JANETTE DEL ROSARIO', 'CAMPOS', 'M RQUEZ', 'M', 'cecilia_1309@hotmail.com', '4492310718', 1, 1, 1),
+(18, 'TITA670625G21', 'ANABEL', 'TRINIDAD', 'TRINIDAD', 'M', 'aniytt@yahoo.com.mx', '4493000488', 1, 1, 1),
+(19, 'CAOM630224RI5', 'MARICELA', 'CAMACHO', 'OVALLE', 'I', 'urzana660@yahoo.com.mx', '', 3, 1, 1),
+(20, 'LUGJ921118NZA', 'JUAN MANUEL', 'LUEVANO', 'GOMEZ', 'I', 'vhas58@hotmail.com', '', 3, 1, 1),
+(21, 'CACJ670802F64', 'J. ANGEL', 'CARRANZA', 'CARLIN', 'M', 'carranzacarlinl.angel@yahoo.com', '', 1, 1, 1),
+(23, 'COAJ810226E94', 'JOSEFINA', 'CONTRERAS', 'ARRIAGA', 'M', 'yulery@hotmail.com', '4491827174', 1, 1, 1),
+(24, 'CORM6410047G9', 'MARTIN', 'CONTRERAS', 'ROMO', 'V', 'conromo64@hotmail.com', '4491062147', 2, 1, 1),
+(25, 'TOSJ641125R23', 'JAIME', 'DE LA TORRE', 'SIFUENTES', 'I', 'jaimerutilio@msn.com', '4491981786', 3, 1, 1),
+(26, '', ' ALBERTO', 'QUEZADA', ' VAZQUEZ', 'I', 'maester56@hotmail.com', '4491027162', 3, 1, 1),
+(27, 'HEMA631216DV8', 'MARIA ALICIA', 'HERNANDEZ', 'MORAN', 'V', 'aliferic@yahoo.com.mx', '', 2, 1, 1),
+(28, 'MOOA840616DAA', 'ANA LAURA', 'MONTES', 'ORTEGA', 'M', 'anylu38@hotmail.com', '', 1, 1, 1),
+(29, '', 'ARY ISRAEL', 'HERNANDEZ', 'LAZCANO', 'I', 'marcolino.nava@gmail.com', '4491556989', 3, 1, 1),
+(30, '', 'SERGIO LUIS', 'PALACIO', 'IBARROLA', 'V', '', '', 2, 1, 1),
+(32, 'ROTB620901N91', 'BERNARDO', 'RODRIGUEZ', 'TAPIA', 'V', 'joseph-pozos@hotmail.com', '4491735905', 2, 1, 1),
+(33, 'ROGH7601068V4', 'HILDA LUCIA', 'RODRIGUEZ', 'GOMEZ', 'V', 'hildardz76@hotmail.com', '', 2, 1, 1),
+(34, 'ROES620528EKA', 'SERGIO ENRIQUE', 'ROMERO', 'ESCOBOSA', 'I', 'serenrique62@gmail.com', '4491107054', 3, 1, 1),
+(35, 'QUGK801111UA3', 'KARLA ALEJANDRA', 'QUEZADA', 'GALVAN', 'V', '', '', 2, 1, 1),
+(36, 'VARL7107197Z8', 'LAURA', 'VARGAS', 'RIVERA', 'V', '', '4492128801', 2, 1, 1),
+(37, 'LODG7107077T2', 'GUILLERMO', 'LOPEZ', 'DIEGO', 'M', 'guillermo_l_d@hotmail.com', '', 1, 1, 1),
+(38, '', 'JANELY ANAYENZI', 'GARCIA', 'QUIROZ', 'I', '', '', 3, 1, 1),
+(39, 'AASP9308261U8', 'PRISCILA GABRIELA', 'ANDRADE', 'SANCHEZ', 'V', '', '', 2, 1, 1),
+(40, '', 'ERNESTO ROMEO', 'GARIBAY', 'MARTINEZ', 'V', '', '', 2, 1, 1),
+(41, '', 'VICTOR HUGO', 'MARIN', 'RAMIREZ', 'I', '', '', 3, 1, 1),
+(42, '', 'FABIOLA GUADALUPE', 'ARELLANO', 'RANGEL', 'V', '', '', 2, 1, 1),
+(43, '', 'MARIA GUADALUPE', 'MANCILLA', 'ROMO', 'V', '', '', 2, 1, 1),
+(44, '', 'CARLOS ALBERTO', 'ACEVEDO', 'SANCHEZ', 'M', '', '', 1, 1, 1),
+(45, '', 'VERONICA DEL ROCIO', 'FLORES', 'REYES', 'M', '', '', 1, 1, 1),
+(46, '', 'LETICIA ANGELICA', 'LEDESMA', 'ESPINOZA', 'M', '', '', 1, 1, 1),
+(47, '', 'ERIKA LILIANA', 'PADILLA', 'CONTRERAS', 'V', '', '', 2, 1, 1),
+(48, '', 'MANUEL', 'TRINIDAD', 'RODRIGUEZ', 'V', '', '', 2, 1, 1),
+(49, '', 'MAYRA', 'GUERRERO', 'ARROYO', '', '', '', 1, 1, 1),
+(53, '', 'TERESA', 'MORALES', 'ESPARZA', 'M', '', '', 1, 1, 1),
+(54, '', 'JOSE FERNANDO', 'MONTANTES', 'CASTA EDA', 'V', '', '', 2, 1, 1),
+(55, 'MOSR8707093VA', 'ROSA ARCELIA', 'MONTOYA', 'SANTOYO', 'V', '', '', 2, 1, 1),
+(56, '', 'OSCAR EDUARDO', 'ORNELAS', 'URZ A', 'M', '', '', 1, 1, 1),
+(59, '', 'DAVID', 'ACOSTA', 'MARQUEZ', 'V', '', '', 2, 1, 1),
+(64, '', 'LUIS MANUEL', 'RAMOS', 'SANDOVAL', '', '', '', 1, 1, 1),
+(70, '', 'JANELY ANAYENZI', 'GARCIA', 'QUIROZ', '', '', '', 1, 1, 1),
+(71, '', 'URIEL', 'MORALES', 'ELIAS', 'V', '', '', 2, 1, 1),
+(72, '', 'KARLA CECILIA', 'ACEVEDO', 'MORENO', 'V', '', '', 2, 1, 1),
+(75, '', 'FERNANDO MISAEL', 'PEREZ', 'HERNANDEZ', 'V', '', '', 2, 1, 1),
+(89, '', 'FATIMA ENEDINA', 'SABAD', 'ROSALES', 'I', '', '', 3, 1, 1),
+(90, '', ' OMAR GUADALUPE', 'CLAUDIO', 'GOMEZ', 'I', '', '', 3, 1, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `materia`
+--
+
+CREATE TABLE `materia` (
+  `id_materia` int(11) NOT NULL,
+  `nombre` varchar(100) NOT NULL,
+  `nombre_corto` varchar(20) NOT NULL,
+  `semestre` int(11) NOT NULL,
+  `especialidad` varchar(20) NOT NULL,
+  `horas` int(11) NOT NULL,
+  `tipo_semestre` varchar(1) DEFAULT NULL,
+  `id_academia` int(11) DEFAULT NULL,
+  `id_status` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `materia`
+--
+
+INSERT INTO `materia` (`id_materia`, `nombre`, `nombre_corto`, `semestre`, `especialidad`, `horas`, `tipo_semestre`, `id_academia`, `id_status`) VALUES
+(1, 'GEOMETRIA Y TRIGONOMETRIA', 'GEO Y TRIGO', 2, 'B', 4, 'P', NULL, 0),
+(2, 'INGLES II', 'INGLES II', 2, 'B', 3, 'P', NULL, 0),
+(3, 'CONSERVACION DE LA ENERGIA Y SUS INTERACCIONES CON LA MATERIA', 'CONS ENE IM', 2, 'B', 4, 'P', NULL, 0),
+(4, 'LECTURA, EXPRESION ORAL Y ESCRITA II', 'LEOYE II', 2, 'B', 4, 'P', NULL, 0),
+(5, 'DESARROLLA SOFTWARE UTILIZANDO PROGRAMACION ESTRUCTURADA', 'PROG. ESTRUC.', 2, 'P', 10, 'P', NULL, 0),
+(6, 'DISE¥A Y ADMINISTRA BDD SIMPLES', 'D. BASE DATOS', 2, 'P', 7, 'P', NULL, 0),
+(7, 'ENSAMBLA E INSTALA CONTROLADORES Y DISPOSITIVOS PERIFERICOS', 'ENS. INST. CONT', 2, 'S', 10, 'P', NULL, 0),
+(8, 'INSTALA Y CONFIGURA SOFTWARE', 'INS. CONF. SOFTW', 2, 'S', 7, 'P', NULL, 0),
+(9, 'INSTALA Y CONFIGURA SOFTWARE DE ACUERDO A LAS ESPECIFICACIONES Y REQUERIMIENTOS DEL USUARIO', 'INS. SOFT.', 2, 'S', 5, 'P', NULL, 0),
+(10, 'DISTINGUE LOS DIFERENTES TIPOS DE EMPRESAS, DOCUMENTOS, ADMINISTRACIONN Y RECURSOS', 'DIS.TIP.EMP.', 2, 'H', 10, 'P', NULL, 0),
+(11, 'ELABORA ESTRARTEGIAS PARA REALIZAR ACTIVIDADES EN SU AREA', 'ELAB. ESTRATEGIAS', 2, 'H', 7, 'P', NULL, 0),
+(12, 'MANTIENE EL SISTEMA ELECTRICO DEL AUTOMOVIL CON BASE EN EL MANUAL DEL FABRICANTE', 'M.S. ELECT.', 2, 'M', 6, 'P', NULL, 0),
+(13, 'MANTIENE EL SISTEMA ELECTRONICO DEL AUTOMOVIL', 'M. SIS. EL. AUT', 2, 'M', 11, 'P', NULL, 0),
+(14, 'CALCULO DIFERENCIAL', 'CALCULO DIF', 4, 'B', 4, 'P', NULL, 0),
+(15, 'INGLES IV', 'INGLES IV', 4, 'B', 3, 'P', NULL, 0),
+(16, 'FISICA I', 'FISICA', 4, 'B', 4, 'P', NULL, 0),
+(17, 'ECOLOGIA', 'ECOLOGIA', 4, 'B', 4, 'P', NULL, 0),
+(18, 'DESARROLLA APLICACIONES M?VILES PARA ANDROID', 'DES. AP. ANDROID', 6, 'P', 6, 'P', NULL, 0),
+(19, 'DESARROLLA APLICACIONES MOVILES PARA IOS', 'DES. AP. IOS', 6, 'P', 6, 'P', NULL, 0),
+(20, 'BRINDA SOPORTE TECNICO DE MANERA PRESENCIAL', 'SOP.TEC.PRE.', 4, 'S', 6, 'P', NULL, 0),
+(21, 'BRINDA SOPORTE TECNICO A DISTANCIA', 'SOP.TEC.DIS.', 4, 'S', 11, 'P', NULL, 0),
+(22, 'ASISTE EN LAS ACTIVIDADES DE CAPACITACION PARA EL DESARROLLO DEL CAPITAL HUMANO', 'ASIS.CAP. C.H', 4, 'H', 7, 'P', NULL, 0),
+(23, 'EVALUA EL DESEMPE¥O DE LA ORGANIZACION UTILIZANDO HERRAMIENTAS DE CALIDAD', 'EV.DES.ORG.H.C', 4, 'H', 10, 'P', NULL, 0),
+(24, 'CORRIGE FALLAS DE LOS SISTEMAS DE INYECCION ELECTRONICA DE LOS MOTORES DE GASOLINA Y DIESEL', 'CORR.INY.ELECT.', 4, 'M', 7, 'P', NULL, 0),
+(25, 'MANTIENE LAS EMISIONES CONTAMINANTES DENTRO DE LAS ESPECIFICACIONES DEL FABRICANTE', 'MAN.EM.CON.E.F', 4, 'M', 4, 'P', NULL, 0),
+(26, 'DIAGNOSTICA EL FUNCIONAMIENTO DE LOS SISTEMAS DE ENCENDIDO ELECTRONICO Y COMPUTARIZADO DEL MOTOR', 'DIAG.F.S.E.CONT.', 4, 'M', 6, 'P', NULL, 0),
+(27, 'GESTIONA LOS PROCESOS DE CAPACITACI?N PARA EL DESARROLLO DEL TALENTO HUMANO', 'GES P CAP DTH', 4, 'H', 10, 'P', NULL, 0),
+(28, 'PROMUEVE CONDICIONES DE TRABAJO SALUDABLES EN LA ORGANIZACI?N', 'PCT SALUD ORG', 4, 'H', 7, 'P', NULL, 0),
+(29, 'PROBABILIDAD Y ESTADISTICA', 'PROB. Y EST.', 6, 'B', 5, 'P', NULL, 0),
+(30, 'TEMAS DE FILOSOFIA', 'T. DE FILOSOFIA', 6, 'B', 5, 'P', NULL, 0),
+(31, 'ADMINISTRA Y CONFIGURA PLATAFORMAS DE E-LEARNING', 'A Y C P.ELEARNING', 6, 'P', 6, 'P', NULL, 0),
+(32, 'TEMAS SELECTOS DE MATEM?TICAS I', 'T.SEL MATE I', 4, 'B', 4, 'P', NULL, 0),
+(33, 'INSTALA UNA RED LAN', 'INST. RED LAN', 6, 'S', 6, 'P', NULL, 0),
+(34, 'OPERA UNA RED LAN', 'OPERA RED LAN', 6, 'S', 6, 'P', NULL, 0),
+(35, 'DETERMINA LA NOMINA DEL PERSONAL DE LA ORGANIZACION TOMANDO EN CUENTA LA NORMATIVIDAD LABORAL', 'DET.NOM.NORM.', 6, 'H', 8, 'P', NULL, 0),
+(36, 'DETERMINA REMUNERACIONES DEL PERSONAL EN SITUACIONES EXTRAORDINARIAS', 'DET.REM.P.S.EXT.', 6, 'H', 4, 'P', NULL, 0),
+(37, 'MANTIENE LOS SISTEMAS DE SUSPENSION Y DIRECCION DEL AUTOMOVIL', 'MAN.SIS.SUSP Y DIR', 6, 'M', 5, 'P', NULL, 0),
+(38, 'MANTIENE LOS SISTEMAS DE FRENOS EN CONDICIONES DE OPERACION', 'MAN. SIST. FRENOS', 6, 'M', 7, 'P', NULL, 0),
+(39, 'IMPLEMENTA BASE DE DATOS NO RELACIONALES EN UN SISTEMA DE INFORMACI?N', 'IMPLE BD NO REL SI', 4, 'P', 8, 'P', NULL, 0),
+(40, 'REACCIONES QU?MICAS: CONSERVACI?N DE LA MATERIA EN LA FORMACI?N DE NUEVAS SUSTANCIAS', 'REACC QUIMICAS', 4, 'B', 4, 'P', NULL, 0),
+(41, 'TEMAS DE ADMINISTRACION', 'ADMINISTRACION', 6, 'O', 5, 'P', NULL, 0),
+(42, 'INTRODUCCION A LA ECONOMIA', 'ECONOMIA', 6, 'O', 5, 'P', NULL, 0),
+(43, 'TEMAS DE FISICA', 'TEM. FISICA', 6, 'O', 5, 'P', NULL, 0),
+(44, 'IMPLEMENTA BASE DE DATOS RELACIONALES EN UN SISTEMA DE INFORMACI?N', 'IMPLE BD REL SI', 4, 'P', 9, 'P', NULL, 0),
+(45, 'MATEMATICAS APLICADAS', 'MAT. APL.', 6, 'O', 5, 'P', NULL, 0),
+(46, 'BIOLOGIA CONTEMPORANEA', 'BIOLOGIA C.', 6, 'O', 5, 'P', NULL, 0),
+(47, 'CIENCIAS SOCIALES II', 'CIEN SOC  II', 2, 'B', 2, 'P', NULL, 0),
+(48, 'CIENCIAS SOCIALES III', 'CIEN SOC  III', 4, 'B', 2, 'P', NULL, 0),
+(49, 'CONCIENCIA HIST?RICA I. PERSPECTIVAS DEL MXICO ANTIGUO EN LOS CONTEXTOS GLOBALES', 'CONC HIST I', 4, 'B', 3, 'P', NULL, 0),
+(50, 'CULTURA DIGITAL II', 'CULT DIGITAL II', 2, 'B', 2, 'P', NULL, 0),
+(51, 'DISE¥A SOFTWARE DE SISTEMAS INFORM?TICOS', 'DISE¥A SOFT SI', 2, 'P', 5, 'P', NULL, 0),
+(52, 'CODIFICA SOFTWARE DE SISTEMAS INFORM?TICOS', 'CODIFICA SOFT SI', 2, 'P', 7, 'P', NULL, 0),
+(53, 'IMPLEMENTA SOFTWARE DE SISTEMAS INFORM?TICOS', 'IMPLEMENTA SOFT SI', 2, 'P', 5, 'P', NULL, 0),
+(54, 'PENSAMIENTO MATEM?TICO II', 'PENS. MATE. II', 2, 'B', 4, 'P', NULL, 0),
+(55, 'MANTIENE EL SISTEMA DE INYECCI?N ELECTR?NICA DE LOS MOTORES DE GASOLINA Y DISEL', 'MSIEMGD', 4, 'M', 7, 'P', NULL, 0),
+(56, 'MANTIENE EL SISTEMA DE EMISIONES CONTAMINANTES DEL AUTOM?VIL', 'MSECA', 4, 'M', 4, 'P', NULL, 0),
+(57, 'MANTIENE EL SISTEMA DE ENCENDIDO ELECTR?NICO Y COMPUTARIZADO DEL AUTOM?VIL', 'MSEECA', 4, 'M', 6, 'P', NULL, 0),
+(58, 'EJECUTA PROCEDIMIENTOS ADMINISTRATIVOS DEL ?REA DE RECURSOS HUMANOS', 'EJECUTA PAARH', 2, 'H', 10, 'P', NULL, 0),
+(59, 'GESTIONA DOCUMENTACI?N DEL ?REA DE RECURSOS HUMANOS', 'GEST DOC ARH', 2, 'H', 7, 'P', NULL, 0),
+(60, 'LENGUA Y COMUNICACI?N', 'LENG Y COMUN II', 2, 'B', 3, 'P', NULL, 0),
+(61, 'TUTOR?A', 'TUTOR?A', 0, 'T', 1, 'P', NULL, 0),
+(62, 'ESCOLTA', 'ESCOLTA', 0, '', 1, 'P', NULL, 0),
+(63, 'ACT. INTEGRAL BANDA DE GUERRA', 'BANDA DE GUERRA', 0, '', 1, 'P', NULL, 0),
+(64, 'ACT. INTEGRAL GUITARRA', 'GUITARRA', 0, '', 1, 'P', NULL, 0),
+(65, 'ACT. INTEGRAL DIBUJO, PINTURA O COMICS (EAC)', 'EAC', 0, '', 1, 'P', NULL, 0),
+(66, 'ACT. INTEGRAL MEDIOAMBIENTAL', 'MEDIOAMBIENTAL', 0, '', 1, 'P', NULL, 0),
+(67, 'DEPORTES', 'DEPORTES', 0, 'T', 1, 'P', NULL, 0),
+(68, 'ACT. PORRA T.M.', 'PORRA', 0, 'H', 1, 'P', NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -389,10 +244,10 @@ CREATE TABLE `status` (
 --
 
 INSERT INTO `status` (`id_status`, `descripcion`) VALUES
-(1, 'Pendiente'),
+(1, 'Activo'),
 (2, 'Inactivo'),
 (3, 'Suspendido'),
-(4, 'Activo'),
+(4, 'Pendiente'),
 (5, 'Baja');
 
 -- --------------------------------------------------------
@@ -465,9 +320,47 @@ INSERT INTO `usuario` (`id_usuario`, `nombre`, `correo_electronico`, `password`,
 (6, 'Mar', 'marlne@gmail.com', '$2b$12$7Fff2WKw7GEtESTEPVkvh.kmIgyCynpqYFoz7ciVWhhW0tUXuWcFC', 4, 4, '449 539 6287'),
 (7, 'Ian', 'ianYeshua@gmail.com', '$2b$12$mNtF3BfNJpMah78Dyw93i.CQYrF/tD6h7jscGgBuxtb/R4mImlqpy', 4, 4, '444 444 4444');
 
+-- --------------------------------------------------------
+
+--
+-- Estructura Stand-in para la vista `vista_docente`
+-- (Véase abajo para la vista actual)
+--
+CREATE TABLE `vista_docente` (
+`id_docente` int(11)
+,`RFC` varchar(13)
+,`Nombre` varchar(100)
+,`Apellido_pat` varchar(100)
+,`Apellido_mat` varchar(100)
+,`Perfil` text
+,`correo_e` varchar(100)
+,`Telefono` varchar(100)
+,`id_turno` int(11)
+,`id_cct` int(11)
+,`turno` varchar(100)
+,`centro_trabajo` varchar(100)
+,`id_status` int(11)
+,`status` varchar(100)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura para la vista `vista_docente`
+--
+DROP TABLE IF EXISTS `vista_docente`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vista_docente`  AS SELECT `do`.`id_docente` AS `id_docente`, `do`.`RFC` AS `RFC`, `do`.`Nombre` AS `Nombre`, `do`.`Apellido_pat` AS `Apellido_pat`, `do`.`Apellido_mat` AS `Apellido_mat`, `do`.`Perfil` AS `Perfil`, `do`.`correo_e` AS `correo_e`, `do`.`Telefono` AS `Telefono`, `do`.`id_turno` AS `id_turno`, `do`.`id_cct` AS `id_cct`, `tu`.`Descripcion` AS `turno`, `ct`.`Nombre` AS `centro_trabajo`, `do`.`id_status` AS `id_status`, `st`.`descripcion` AS `status` FROM (((`docente` `do` left join `turno` `tu` on(`do`.`id_turno` = `tu`.`id_turno`)) left join `centro_trabajo` `ct` on(`do`.`id_cct` = `ct`.`id_cct`)) left join `status` `st` on(`do`.`id_status` = `st`.`id_status`)) ;
+
 --
 -- Índices para tablas volcadas
 --
+
+--
+-- Indices de la tabla `academia`
+--
+ALTER TABLE `academia`
+  ADD PRIMARY KEY (`id_academia`);
 
 --
 -- Indices de la tabla `centro_trabajo`
@@ -481,7 +374,14 @@ ALTER TABLE `centro_trabajo`
 ALTER TABLE `docente`
   ADD PRIMARY KEY (`id_docente`),
   ADD KEY `fk_docente_turnp` (`id_turno`),
-  ADD KEY `fk_docente_cct` (`id_cct`);
+  ADD KEY `fk_docente_cct` (`id_cct`),
+  ADD KEY `fk_docente_status` (`id_status`);
+
+--
+-- Indices de la tabla `materia`
+--
+ALTER TABLE `materia`
+  ADD PRIMARY KEY (`id_materia`);
 
 --
 -- Indices de la tabla `status`
@@ -514,6 +414,12 @@ ALTER TABLE `usuario`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `academia`
+--
+ALTER TABLE `academia`
+  MODIFY `id_academia` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `centro_trabajo`
 --
 ALTER TABLE `centro_trabajo`
@@ -523,7 +429,13 @@ ALTER TABLE `centro_trabajo`
 -- AUTO_INCREMENT de la tabla `docente`
 --
 ALTER TABLE `docente`
-  MODIFY `id_docente` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_docente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
+
+--
+-- AUTO_INCREMENT de la tabla `materia`
+--
+ALTER TABLE `materia`
+  MODIFY `id_materia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
 
 --
 -- AUTO_INCREMENT de la tabla `status`
@@ -558,6 +470,7 @@ ALTER TABLE `usuario`
 --
 ALTER TABLE `docente`
   ADD CONSTRAINT `fk_docente_cct` FOREIGN KEY (`id_cct`) REFERENCES `centro_trabajo` (`id_cct`),
+  ADD CONSTRAINT `fk_docente_status` FOREIGN KEY (`id_status`) REFERENCES `status` (`id_status`),
   ADD CONSTRAINT `fk_docente_turnp` FOREIGN KEY (`id_turno`) REFERENCES `turno` (`id_turno`);
 
 --

@@ -2,7 +2,7 @@ const bcrypt = require('bcrypt');
 const { render } = require('express/lib/response');
 const mysql = require('mysql');
 
-function renderManDocente(req, res){
+function renderManMateria(req, res){
     req.session.errorM = "";
     req.session.dataCampos = "";  
 
@@ -10,43 +10,41 @@ function renderManDocente(req, res){
     req.session.idEdi = ""; 
 
     try{
-        res.redirect('/manDocente'); // redirecciona a la ruta de manDocente
+        res.redirect('/manMateria'); // redirecciona a la ruta de manMateria
     }catch{
         manAdm(req, res);
     }
 }
 
-function manDocente(req, res) {
+function manMateria(req, res) {
     const usuario = req.session.dataCampos;
     const error = req.session.errorM;
     
     req.getConnection((err, conn) => {
-        conn.query('SELECT id_turno,descripcion FROM turno', (err, turnos) => {
+        conn.query('SELECT id_academia, nombre, nombre_corto FROM academia', (err, academias) => {
             if(err){
                 console.log(err);
-                return res.status(500).send("Error al obtener turnos");
+                return res.status(500).send("Error al obtener academias");
             }
             conn.query('SELECT id_status, descripcion FROM status', (err, status) => {
                 if (err) {
                     console.log("Error al obtener status:", err);
                     return res.status(500).send("Error al obtener status");
                 }
-                conn.query('SELECT id_docente, RFC, Nombre, Apellido_pat, Apellido_mat, Perfil, correo_e, Telefono, id_turno, id_cct, turno, centro_trabajo, id_status, status FROM vista_docente ORDER BY Apellido_pat', (err, rows) => {
-                    if (rows.length > 0) {
-                        console.log("rows ", rows);
-                        const datos = rows; 
-                        console.log("datos ", datos);
-                        res.render('usuarios/administrador/Docente/manDocente', { 
+               conn.query('SELECT id_materia, nombre_materia, nombre_corto, semestre, especialidad, horas, tipo_semestre, id_academia,nombre_academia, academia_corto, id_status, status_materia FROM vista_materias ORDER BY nombre_materia', (err, datos) => {
+                    console.log("datos ", datos);
+                    if (datos.length > 0) {                                            
+                        res.render('usuarios/administrador/Materia/manMateria', { 
                             datos: datos, 
                             status: status,
-                            turnos: turnos, 
+                            academias: academias, 
                             name: req.session.name, 
                             tipoUsuario: 2, 
                             usuario: usuario, 
                             error: error});
                             return;
                     } else {
-                        res.render('usuarios/administrador/Docente/manDocente', { 
+                        res.render('usuarios/administrador/Materia/manMateria', { 
                             turnos: turnos,
                             name: req.session.name, 
                             tipoUsuario: 2, 
@@ -60,10 +58,10 @@ function manDocente(req, res) {
     });
 }
 
-function ediDocente(req, res) {
+function ediMateria(req, res) {
     const usuario = req.session.dataCampos;
     const error = req.session.errorM;
-    const idDocente = req.query.id; // <-- Captura el id_docente de la URL
+    const idMateria = req.query.id; // <-- Captura el id_docente de la URL
 
     req.getConnection((err, conn) => {
         if (err) {
@@ -72,39 +70,35 @@ function ediDocente(req, res) {
         }
 
         // Consulta todos los turnos
-        conn.query('SELECT id_turno, descripcion FROM turno', (err, turnos) => {
-            if (err) {
-                console.log("Error al obtener turnos:", err);
-                return res.status(500).send("Error al obtener turnos");
+        conn.query('SELECT id_academia, nombre, nombre_corto FROM academia', (err, academias) => {
+            if(err){
+                console.log(err);
+                return res.status(500).send("Error al obtener academias");
             }
             conn.query('SELECT id_status, descripcion FROM status', (err, status) => {
                 if (err) {
                     console.log("Error al obtener status:", err);
                     return res.status(500).send("Error al obtener status");
                 }
-                //const turnos = rows; 
-                // Consulta todos los docentes
-                conn.query('SELECT id_docente, RFC, Nombre, Apellido_pat, Apellido_mat, Perfil, correo_e, Telefono, id_turno, id_cct, turno, centro_trabajo, status, id_status FROM vista_docente ORDER BY Apellido_pat', (err, docentes) => {
+                conn.query('SELECT id_materia, nombre_materia, nombre_corto, semestre, especialidad, horas, tipo_semestre, id_academia,nombre_academia, academia_corto, id_status, status_materia FROM vista_materias ORDER BY nombre_materia', (err, materias) => {
                     if (err) {
-                        console.log("Error al obtener docentes:", err);
-                        return res.status(500).send("Error al obtener docentes");
+                        console.log("Error al obtener materias:", err);
+                        return res.status(500).send("Error al obtener materias");
                     }
-                    //const docentes = rows; 
-                    // Busca un docente específico si se pasó el id
-                    let docente = null;
-                    if (idDocente) {
-                        docente = docentes.find(d => d.id_docente == idDocente);
+                    let materia = null;
+                    if (idMateria) {
+                        materia = materias.find(d => d.id_materia == idMateria);
                     }
-                    console.log("docentes ", docentes);
-                    console.log("turnos ", turnos);
-                    console.log("idDocente ", idDocente);
-                    console.log("docente ", docente);
-                    res.render('usuarios/administrador/Docente/manDocente', {
-                        datos: docentes,
-                        turnos: turnos,
+                    console.log("materias ", materias);
+                    console.log("academias ", academias);
+                    console.log("idMateria ", idMateria);
+                    console.log("materia ", materia);
+                    res.render('usuarios/administrador/Materia/manMateria', {
+                        datos: materias,
+                        academias: academias,
                         status: status, 
-                        docente: docente, 
-                        modificar: idDocente ? true : false, // Indica si se está editando un docente
+                        materia: materia, 
+                        modificar: idMateria ? true : false, // Indica si se está editando un docente
                         name: req.session.name,
                         tipoUsuario: 2,
                         usuario: usuario,
@@ -117,19 +111,15 @@ function ediDocente(req, res) {
 }
 
 
-function manipulaDocente(req, res){
+function manipulaMateria(req, res){
     const {
-        id_docente,
-        rfc,
+        id_materia,
         nombre,
-        appat,
-        apmat,
-        perfil,
-        correo_electronico,
-        telefono,
-        turno,
-        id_cct,
-        status
+        nomcor,
+        semestre,
+        horas,
+        academia,
+        status 
     } = req.body;
     const usuario = req.session.dataCampos;
     const error = req.session.errorM;
@@ -142,46 +132,46 @@ function manipulaDocente(req, res){
         }
 
         // Verifica si se está editando o insertando
-        if (id_docente) {
-            // Editar docente existente
-            const sql = 'UPDATE docente SET RFC = ?, Nombre = ?, Apellido_pat = ?, Apellido_mat = ?, Perfil = ?, correo_e = ?, Telefono = ?, id_turno = ?, id_cct = ?, id_status = ? WHERE id_docente = ?';
-            conn.query(sql, [rfc, nombre, appat, apmat, perfil, correo_electronico, telefono, turno, 1, status, id_docente], (err) => {
+        if (id_materia) {
+            // Editar materia existente
+            const sql = 'UPDATE materia SET nombre = ?, nombre_corto = ?, semestre = ?, especialidad = ?, horas = ?, tipo_semestre = ?, id_academia = ?, id_status = ? WHERE id_materia = ?';
+            conn.query(sql, [nombre, nomcor, semestre,"x", horas, "x", academia, status, id_materia ], (err) => {
                 if (err) {
-                    console.log("Error al actualizar docente:", err);
-                    return res.status(500).send("Error al actualizar docente");
+                    console.log("Error al actualizar la materia:", err);
+                    return res.status(500).send("Error al actualizar materia");
                 }
-                req.session.errorM = "Docente actualizado correctamente";
-                res.redirect('/manDocente');
+                req.session.errorM = "Materia actualizado correctamente";
+                res.redirect('/manMateria');
             });
         } else {
             // Insertar nuevo docente
-            const sql = 'INSERT INTO docente (RFC, Nombre, Apellido_pat, Apellido_mat, Perfil, correo_e, Telefono, id_turno, id_cct) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)';
-            const values = [rfc, nombre, appat, apmat, perfil, correo_electronico, telefono, turno, 1];
+            const sql = 'INSERT INTO materia (nombre, nombre_corto, semestre, especialidad, horas, tipo_semestre, id_academia, id_status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
+            const values = [nombre, nomcor, semestre, "x", horas, "X", academia, status];
 
             // 👇 Aquí se imprime el query con los valores insertados
             console.log("Query a ejecutar:", mysql.format(sql, values));
 
             conn.query(sql, values, (err) => {
             if (err) {
-                console.log("Error al insertar docente:", err);
-                return res.status(500).send("Error al insertar docente");
+                console.log("Error al insertar materia:", err);
+                return res.status(500).send("Error al insertar materia");
             }
 
-            req.session.errorM = "Docente agregado correctamente";
-            res.redirect('/manDocente');
+            req.session.errorM = "Materia agregado correctamente";
+            res.redirect('/manMateria');
             });
 
         }
     });
 }
 
-    function borDocente(req, res) {
+    function borMateria(req, res) {
         const usuario = req.session.dataCampos;
         const error = req.session.errorM;
-        const idDocente = req.query.id; // <-- Captura el id_docente desde la URL
+        const idMateria = req.query.id; // <-- Captura el id_docente desde la URL
 
-        if (!idDocente) {
-            return res.status(400).send("Falta el ID del docente");
+        if (!idMateria) {
+            return res.status(400).send("Falta el ID de la materia");
         }
 
         req.getConnection((err, conn) => {
@@ -190,32 +180,24 @@ function manipulaDocente(req, res){
                 return res.status(500).send("Error en la conexión");
             }
 
-            const sql = 'DELETE FROM docente WHERE id_docente = ?';
-            conn.query(sql, [idDocente], (err, result) => {
+            const sql = 'DELETE FROM materia WHERE id_materia = ?';
+            conn.query(sql, [idMateria], (err, result) => {
                 if (err) {
                     console.log("Error al eliminar docente:", err);
                     return res.status(500).send("Error al eliminar docente");
                 }
 
-                req.session.errorM = "Docente eliminado correctamente";
-                res.redirect('/manDocente');
+                req.session.errorM = "";
+                res.redirect('/manMateria');
             });
         });
     }
 
-
-
-
-
-
-
-
-
 //para llamar a las funciones
 module.exports = {
-    manDocente,
-    ediDocente,
-    borDocente,
-    manipulaDocente,
-    renderManDocente,
+    manMateria,
+    ediMateria,
+    borMateria,
+    manipulaMateria,
+    renderManMateria,
 };
