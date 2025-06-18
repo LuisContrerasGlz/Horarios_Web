@@ -28,9 +28,27 @@
         
         {{#if name}}
             {{#isEqual tipoUsuario 2}}
-                <div class="relative">
+
+                <div class="relative" inline-block text-right>
                     <button onclick="toggleCatalogos()" class="text-white bg-gray-700 hover:bg-gray-800 font-semibold py-2 px-4 rounded">
                         Catálogos
+                    </button>
+                    <div id="dropdownCatalogos"
+                         class="hidden absolute left-0 mt-2 w-44 rounded-md shadow-lg bg-white z-50">
+                        <div class="py-1 flex flex-col">
+                            <a href="/renderManDocente"
+                               class="block px-4 py-2 text-gray-700 hover:bg-gray-300">Docentes</a>
+                            <a href="/renderManMateria"
+                               class="block px-4 py-2 text-gray-700 hover:bg-gray-300">Materias</a>
+                            <a href="/renderManAcademia"
+                               class="block px-4 py-2 text-gray-700 hover:bg-gray-300">Academias</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relative">
+                    <button onclick="toggleCatalogos()" class="text-white bg-gray-700 hover:bg-gray-800 font-semibold py-2 px-4 rounded">
+                        Horarios
                     </button>
                     <div id="dropdownCatalogos"
                          class="hidden absolute left-0 mt-2 w-44 rounded-md shadow-lg bg-white z-50">
@@ -42,6 +60,26 @@
                         </div>
                     </div>
                 </div>
+
+
+                <div class="relative">
+                    <button onclick="toggleCatalogos()" class="text-white bg-gray-700 hover:bg-gray-800 font-semibold py-2 px-4 rounded">
+                        Reportes
+                    </button>
+                    <div id="dropdownCatalogos"
+                         class="hidden absolute left-0 mt-2 w-44 rounded-md shadow-lg bg-white z-50">
+                        <div class="py-1 flex flex-col">
+                            <a href="/renderManDocente"
+                               class="block px-4 py-2 text-gray-700 hover:bg-gray-300">Docentes</a>
+                            <a href="/renderManMateria"
+                               class="block px-4 py-2 text-gray-700 hover:bg-gray-300">Materias</a>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
             {{/isEqual}}
         {{/if}}
 

@@ -31,16 +31,18 @@ function manDocente(req, res) {
                     console.log("Error al obtener status:", err);
                     return res.status(500).send("Error al obtener status");
                 }
-                conn.query('SELECT id_docente, RFC, Nombre, Apellido_pat, Apellido_mat, Perfil, correo_e, Telefono, id_turno, id_cct, turno, centro_trabajo, id_status, status FROM vista_docente ORDER BY Apellido_pat', (err, rows) => {
+
+                conn.query('SELECT id_docente, RFC, Nombre, Apellido_pat, Apellido_mat, Perfil, correo_e, Telefono, id_turno, id_cct, turno, centro_trabajo, id_status, status FROM vista_docente WHERE id_cct = ? ORDER BY Apellido_pat',[req.session.idCt],(err, rows) => {
                     if (rows.length > 0) {
-                        console.log("rows ", rows);
+                        //console.log("rows ", rows);
                         const datos = rows; 
-                        console.log("datos ", datos);
+                        //console.log("datos ", datos);
                         res.render('usuarios/administrador/Docente/manDocente', { 
                             datos: datos, 
                             status: status,
                             turnos: turnos, 
                             name: req.session.name, 
+                            cct: req.session.idCt,
                             tipoUsuario: 2, 
                             usuario: usuario, 
                             error: error});
@@ -49,6 +51,7 @@ function manDocente(req, res) {
                         res.render('usuarios/administrador/Docente/manDocente', { 
                             turnos: turnos,
                             name: req.session.name, 
+                            cct: req.session.idCt,
                             tipoUsuario: 2, 
                             usuario: usuario, 
                             error: error});
@@ -82,14 +85,12 @@ function ediDocente(req, res) {
                     console.log("Error al obtener status:", err);
                     return res.status(500).send("Error al obtener status");
                 }
-                //const turnos = rows; 
-                // Consulta todos los docentes
-                conn.query('SELECT id_docente, RFC, Nombre, Apellido_pat, Apellido_mat, Perfil, correo_e, Telefono, id_turno, id_cct, turno, centro_trabajo, status, id_status FROM vista_docente ORDER BY Apellido_pat', (err, docentes) => {
+            
+                conn.query('SELECT id_docente, RFC, Nombre, Apellido_pat, Apellido_mat, Perfil, correo_e, Telefono, id_turno, id_cct, turno, centro_trabajo, id_status, status FROM vista_docente WHERE id_cct = ? ORDER BY Apellido_pat',[req.session.idCt],(err, docentes) => {
                     if (err) {
                         console.log("Error al obtener docentes:", err);
                         return res.status(500).send("Error al obtener docentes");
                     }
-                    //const docentes = rows; 
                     // Busca un docente específico si se pasó el id
                     let docente = null;
                     if (idDocente) {
@@ -106,6 +107,7 @@ function ediDocente(req, res) {
                         docente: docente, 
                         modificar: idDocente ? true : false, // Indica si se está editando un docente
                         name: req.session.name,
+                        cct: req.session.idCt,
                         tipoUsuario: 2,
                         usuario: usuario,
                         error: error
@@ -145,7 +147,7 @@ function manipulaDocente(req, res){
         if (id_docente) {
             // Editar docente existente
             const sql = 'UPDATE docente SET RFC = ?, Nombre = ?, Apellido_pat = ?, Apellido_mat = ?, Perfil = ?, correo_e = ?, Telefono = ?, id_turno = ?, id_cct = ?, id_status = ? WHERE id_docente = ?';
-            conn.query(sql, [rfc, nombre, appat, apmat, perfil, correo_electronico, telefono, turno, 1, status, id_docente], (err) => {
+            conn.query(sql, [rfc, nombre, appat, apmat, perfil, correo_electronico, telefono, turno, req.session.idCt, status, id_docente], (err) => {
                 if (err) {
                     console.log("Error al actualizar docente:", err);
                     return res.status(500).send("Error al actualizar docente");
@@ -155,8 +157,8 @@ function manipulaDocente(req, res){
             });
         } else {
             // Insertar nuevo docente
-            const sql = 'INSERT INTO docente (RFC, Nombre, Apellido_pat, Apellido_mat, Perfil, correo_e, Telefono, id_turno, id_cct) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)';
-            const values = [rfc, nombre, appat, apmat, perfil, correo_electronico, telefono, turno, 1];
+            const sql = 'INSERT INTO docente (RFC, Nombre, Apellido_pat, Apellido_mat, Perfil, correo_e, Telefono, id_turno, id_cct, id_status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?,?)';
+            const values = [rfc, nombre, appat, apmat, perfil, correo_electronico, telefono, turno, req.session.idCt,1];
 
             // 👇 Aquí se imprime el query con los valores insertados
             console.log("Query a ejecutar:", mysql.format(sql, values));

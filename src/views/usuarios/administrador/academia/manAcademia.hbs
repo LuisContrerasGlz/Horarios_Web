@@ -19,20 +19,15 @@
     <body class="bg-indigo-200">
 
     <div>
-        <a href="/renderManDocente" class="font-semibold text-4xl hover:text-gray-400 flex justify-center m-5">Docentes</a>
+        <a href="/renderManAcademia" class="font-semibold text-4xl hover:text-gray-400 flex justify-center m-5">Academias</a>
 
         <div class="flex justify-center m-5">
             <div class="overflow-x-auto max-h-screen w-full px-10">
-                <table id="tablaDocentes" class="display w-full">
+                <table id="tablaAcademias" class="display w-full">
                     <thead>
                         <tr>
-                            <th>RFC</th>
-                            <th>AP. PAT.</th>
-                            <th>AP. MAT.</th>
                             <th>NOMBRE</th>
-                            <th>CORREO</th>
-                            <th>TELEFONO</th>
-                            <th>TURNO</th>
+                            <th>NOM. CORTO</th>
                             <th>ESTATUS</th>
                             <th>EDITAR</th>
                             <th>BORRAR</th>                                  
@@ -49,10 +44,10 @@
                                 <td>{{this.Telefono}}</td>
                                 <td>{{this.turno}}</td>
                                 <td>{{this.status}}</td>
-                                <td class="px-4 py-2 bg-gray-100 border border-gray-600 text-center"><a href="/ediDocente?id={{this.id_docente}}"><svg class="h-8 w-10 text-gray-600"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4" />  <line x1="13.5" y1="6.5" x2="17.5" y2="10.5" /></svg></a></td>
+                                <td class="px-4 py-2 bg-gray-100 border border-gray-600 text-center"><a href="/ediAcademia?id={{this.id_docente}}"><svg class="h-8 w-10 text-gray-600"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4" />  <line x1="13.5" y1="6.5" x2="17.5" y2="10.5" /></svg></a></td>
 
                                 <td class="px-4 py-2 bg-gray-100 border border-gray-600 text-center">
-                                <a href="/borDocente?id={{this.id_docente}}" onclick="return confirm('¿Estás seguro de eliminar este docente?');">
+                                <a href="/borAcademia?id={{this.id_docente}}" onclick="return confirm('¿Estás seguro de eliminar este docente?');">
                                     <svg class="h-8 w-10 text-red-600" width="24" height="24" viewBox="0 0 24 24"
                                         stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                     <path stroke="none" d="M0 0h24v24H0z" />
@@ -73,15 +68,15 @@
         </div>
             <div class="card">
                 {{#if modificar}}
-                    <h2  class="font-semibold font-mono text-4xl flex justify-center m-5">Modifica Docente<h2/>
+                    <h2  class="font-semibold font-mono text-4xl flex justify-center m-5">Modifica Academia<h2/>
                 {{else}}
-                    <h2  class="font-semibold text-4xl flex justify-center m-5">Alta de Docente<h2/> 
+                    <h2  class="font-semibold text-4xl flex justify-center m-5">Alta de Academia<h2/> 
                 {{/if}}
             </div>
 
             <div class="mx-auto my-8 p-4 bg-white w-full sm:w-5/6 md:w-4/6 lg:w-2/3 xl:w-1/2 border rounded-lg shadow-lg">
                 <div class="card-body">
-                    <form action="/manipulaDocente" method="POST" onsubmit="return telefonoValid() && correoValid()">
+                    <form action="/manipulaAcademia" method="POST" onsubmit="return telefonoValid() && correoValid()">
                         <input type="text" name="id_cct" id="id_cct" value="{{cct}}" hidden>
                         <input type="text" name="id_docente" id="id_docente" value="{{docente.id_docente}}" >
                         <label for="rfc"><i class="fas fa-user"></i> RFC</label>
@@ -217,7 +212,7 @@
     <!-- Inicializar DataTables -->
     <script>
         $(document).ready(function () {
-            $('#tablaDocentes').DataTable({
+            $('#tablaAcademias').DataTable({
                 pageLength: 5,
                 lengthMenu: [ [5, 10, 25, 50, -1], [5, 10, 25, 50, "Todos"] ],
                 language: {

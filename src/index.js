@@ -12,15 +12,10 @@ const { redirect } = require('express/lib/response');
 const loginRouter = require('./router/loginR');
 const manDocenteCotroller = require('./router/administrador/Docente/manDocenteR');
 const manMateriaCotroller = require('./router/administrador/materia/manMateriaR');
+const manAcademiaCotroller = require('./router/administrador/academia/manAcademiaR');
 
 const app = express();
 const PORT = 3000;
-
-//const Handlebars = require('handlebars');
-//Handlebars.registerHelper('isEqual', function(value1, value2, options) {
-//    return value1 == value2 ? options.fn(this) : options.inverse(this);
-//});
-
 
 const exphbs = require('express-handlebars');
 
@@ -35,14 +30,6 @@ const hbs = exphbs.create({
     }
   }
 });
-
-
-
-//app.engine('.hbs', engine({
-//    extname: '.hbs',
-//}));
-//app.set('view engine', 'hbs');
-
 
 
 // 🟢 Aquí está el middleware de sesión que faltaba:
@@ -71,7 +58,7 @@ app.use(express.static('funciones'));
 app.use(express.static(__dirname + '/funciones'));
 app.use('/', manDocenteCotroller);
 app.use('/', manMateriaCotroller);
-
+app.use('/', manAcademiaCotroller);
 
 app.set('views', __dirname + '/views');
 app.engine('hbs', hbs.engine);
@@ -79,10 +66,6 @@ app.set('view engine', 'hbs');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-
-
-
-
 
 app.listen(PORT, () => {
     console.log(`Servidor escuchando en http://localhost:${PORT}`);
@@ -94,6 +77,7 @@ app.use('/', loginRouter);
 app.get('/', (req, res) => {
     if (req.session && req.session.loggedin) {
         let name = req.session.name;
+        let cct  = req.session.idCt;
         let tipoUsuario = req.session.tipoUsuario;
         let id = req.session.idUser;
         res.render('principal', { name, tipoUsuario, id });
@@ -106,7 +90,8 @@ app.get('/principal', (req, res) => {
     res.render('principal', {
         name: req.session?.name || '',
         tipoUsuario: req.session?.tipoUsuario || '',
-        id: req.session?.idUser || ''
+        id: req.session?.idUser || '',
+        cct: req.session?.idCt || ''
     });
 });
 

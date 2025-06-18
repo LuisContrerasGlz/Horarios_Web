@@ -21,32 +21,37 @@ function manMateria(req, res) {
     const error = req.session.errorM;
     
     req.getConnection((err, conn) => {
-        conn.query('SELECT id_academia, nombre, nombre_corto FROM academia', (err, academias) => {
+        conn.query('SELECT id_academia, nombre_academia, nombre_corto,id_cct FROM academia where id_cct=?',[req.session.idCt], (err, academias) => {
             if(err){
                 console.log(err);
                 return res.status(500).send("Error al obtener academias");
             }
+            console.log("academias ", academias);
+            console.log("idCct ", req.session.idCt);
             conn.query('SELECT id_status, descripcion FROM status', (err, status) => {
                 if (err) {
                     console.log("Error al obtener status:", err);
                     return res.status(500).send("Error al obtener status");
                 }
-               conn.query('SELECT id_materia, nombre_materia, nombre_corto, semestre, especialidad, horas, tipo_semestre, id_academia,nombre_academia, academia_corto, id_status, status_materia FROM vista_materias ORDER BY nombre_materia', (err, datos) => {
-                    console.log("datos ", datos);
+                conn.query('SELECT id_materia, nombre_materia, nombre_corto, semestre, especialidad, horas, tipo_semestre, id_academia,nombre_academia, academia_corto, id_status, status_materia,id_cct FROM vista_materias where id_cct = ? ORDER BY nombre_materia', [req.session.idCt],(err, datos) => {
+                    //console.log("datos ", datos);
                     if (datos.length > 0) {                                            
                         res.render('usuarios/administrador/Materia/manMateria', { 
                             datos: datos, 
                             status: status,
                             academias: academias, 
                             name: req.session.name, 
+                            cct: req.session.idCt,
                             tipoUsuario: 2, 
                             usuario: usuario, 
                             error: error});
                             return;
                     } else {
                         res.render('usuarios/administrador/Materia/manMateria', { 
-                            turnos: turnos,
+                            academias: academias,
+                            status: status,
                             name: req.session.name, 
+                            cct: req.session.idCt,
                             tipoUsuario: 2, 
                             usuario: usuario, 
                             error: error});
@@ -70,7 +75,7 @@ function ediMateria(req, res) {
         }
 
         // Consulta todos los turnos
-        conn.query('SELECT id_academia, nombre, nombre_corto FROM academia', (err, academias) => {
+        conn.query('SELECT id_academia, nombre_academia, nombre_corto FROM academia', (err, academias) => {
             if(err){
                 console.log(err);
                 return res.status(500).send("Error al obtener academias");
@@ -80,7 +85,7 @@ function ediMateria(req, res) {
                     console.log("Error al obtener status:", err);
                     return res.status(500).send("Error al obtener status");
                 }
-                conn.query('SELECT id_materia, nombre_materia, nombre_corto, semestre, especialidad, horas, tipo_semestre, id_academia,nombre_academia, academia_corto, id_status, status_materia FROM vista_materias ORDER BY nombre_materia', (err, materias) => {
+                conn.query('SELECT id_materia, nombre_materia, nombre_corto, semestre, especialidad, horas, tipo_semestre, id_academia,nombre_academia, academia_corto, id_status, status_materia,id_cct FROM vista_materias where id_cct = ? ORDER BY nombre_materia', [req.session.idCt],(err, materias) => {
                     if (err) {
                         console.log("Error al obtener materias:", err);
                         return res.status(500).send("Error al obtener materias");
@@ -100,6 +105,7 @@ function ediMateria(req, res) {
                         materia: materia, 
                         modificar: idMateria ? true : false, // Indica si se está editando un docente
                         name: req.session.name,
+                        cct: req.session.idCt,
                         tipoUsuario: 2,
                         usuario: usuario,
                         error: error
@@ -145,8 +151,8 @@ function manipulaMateria(req, res){
             });
         } else {
             // Insertar nuevo docente
-            const sql = 'INSERT INTO materia (nombre, nombre_corto, semestre, especialidad, horas, tipo_semestre, id_academia, id_status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
-            const values = [nombre, nomcor, semestre, "x", horas, "X", academia, status];
+            const sql = 'INSERT INTO materia (nombre, nombre_corto, semestre, especialidad, horas, tipo_semestre, id_academia, id_status, id_cct) VALUES (?, ?, ?, ?, ?, ?, ?, ?,?)';
+            const values = [nombre, nomcor, semestre, "x", horas, "X", academia, status,req.session.idCt];
 
             // 👇 Aquí se imprime el query con los valores insertados
             console.log("Query a ejecutar:", mysql.format(sql, values));

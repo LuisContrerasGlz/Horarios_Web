@@ -19,11 +19,12 @@ function identificacion(req, res) {
                 const user = userdata[0];
                 bcrypt.compare(data.password, user.password, (err, isMatch) => {
                     if (isMatch) {
-                        if (user.status == 4){
+                        if (user.status == 1){
                             req.session.loggedin = true;
                             req.session.name = user.nombre;
                             req.session.idUser = user.id_usuario;
                             req.session.tipoUsuario = user.tipo_usuario;
+                            req.session.idCt = user.id_ct;
                             res.redirect('/');
                         }else{
                             pendiente(req, res);

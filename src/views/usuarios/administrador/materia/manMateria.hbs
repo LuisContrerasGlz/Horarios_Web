@@ -84,6 +84,7 @@
         <div class="mx-auto my-8 p-4 bg-white w-full sm:w-5/6 md:w-4/6 lg:w-2/3 xl:w-1/2 border rounded-lg shadow-lg">
             <div class="card-body">
                 <form action="/manipulaMateria" method="POST" >
+                    <input type="text" name="id_cct" id="id_cct" value="{{cct}}" hidden>
                     <input type="text" name="id_materia" id="id_materia" value="{{materia.id_materia}}" >
                     <label for="nombre"><i class="fas fa-user"></i> Nombre de materia</label>
                     <div class="relative">
@@ -130,12 +131,12 @@
                             {{#each academias}}
                                 {{#if ../modificar}}
                                     {{#if (isEqualInt this.id_academia ../materia.id_academia)}}
-                                        <option value="{{this.id_academia}}" selected>{{this.nombre}}</option>
+                                        <option value="{{this.id_academia}}" selected>{{this.nombre_academia}}</option>
                                     {{else}}
-                                        <option value="{{this.id_academia}}">{{this.nombre}}</option>
+                                        <option value="{{this.id_academia}}">{{this.nombre_academia}}</option>
                                     {{/if}}
                                 {{else}}
-                                    <option value="{{this.id_academia}}">{{this.nombre}}</option>
+                                    <option value="{{this.id_academia}}">{{this.nombre_academia}}</option>
                                 {{/if}}
                             {{/each}}
                         </select>
