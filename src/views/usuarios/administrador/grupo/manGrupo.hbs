@@ -17,19 +17,17 @@
     <body class="bg-indigo-200">
 
     <div>
-        <a href="/renderManMateria" class="font-semibold text-4xl hover:text-gray-400 flex justify-center m-5">Materias</a>
+        <a href="/renderManGrupo" class="font-semibold text-4xl hover:text-gray-400 flex justify-center m-5">Grupos</a>
 
         <div class="flex justify-center m-5">
             <div class="overflow-x-auto max-h-screen w-full px-10">
-                <table id="tablaMaterias" class="display w-full">
+                <table id="tablaGrupos" class="display w-full">
                     <thead>
                     <tr>
-                        <th>MATERIA</th>
-                        <th>DESC. CORTA</th>
-                        <th>SEM.</th>
-                        <th>HRS.</th>
+                        <th>SEMESTRE</th>
+                        <th>GRUPO</th>
                         <th>ACADEMIA</th>
-                        <th>ESTATUS</th>
+                        <th>TURNO</th>
                         <th>EDITAR</th>
                         <th>BORRAR</th>
                     </tr>
@@ -44,7 +42,7 @@
                             <td>{{this.nombre_academia}}</td>
                             <td>{{this.status_materia}}</td>
                             <td class="text-center">
-                                <a href="/ediMateria?id={{this.id_materia}}">
+                                <a href="/ediGrupo?id={{this.id_materia}}">
                                     <svg class="h-8 w-10 text-gray-600" width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
                                         stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                         <path stroke="none" d="M0 0h24v24H0z"/>
@@ -54,7 +52,7 @@
                                 </a>
                             </td>
                             <td class="text-center">
-                                <a href="/borMateria?id={{this.id_materia}}" onclick="return confirm('¿Estás seguro de eliminar la materia?');">
+                                <a href="/borGrupo?id={{this.id_materia}}" onclick="return confirm('¿Estás seguro de eliminar la materia?');">
                                     <svg class="h-8 w-10 text-red-600" width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
                                         stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                         <path stroke="none" d="M0 0h24v24H0z"/>
@@ -75,15 +73,15 @@
 
         <div class="card">
             {{#if modificar}}
-                <h2  class="font-semibold font-mono text-4xl flex justify-center m-5">Modifica Materia<h2/>
+                <h2  class="font-semibold font-mono text-4xl flex justify-center m-5">Modifica Grupo<h2/>
             {{else}}
-                <h2  class="font-semibold text-4xl flex justify-center m-5">Alta de Materia<h2/> 
+                <h2  class="font-semibold text-4xl flex justify-center m-5">Alta de Grupo<h2/> 
             {{/if}}
         </div>
 
         <div class="mx-auto my-8 p-4 bg-white w-full sm:w-5/6 md:w-4/6 lg:w-2/3 xl:w-1/2 border rounded-lg shadow-lg">
             <div class="card-body">
-                <form action="/manipulaMateria" method="POST" >
+                <form action="/manipulaGrupo" method="POST" >
                     <input type="text" name="id_cct" id="id_cct" value="{{cct}}" hidden>
                     <input type="text" name="id_materia" id="id_materia" value="{{materia.id_materia}}" >
                     <label for="nombre"><i class="fas fa-user"></i> Nombre de materia</label>
@@ -195,7 +193,7 @@
     <!-- Inicializar DataTables -->
     <script>
         $(document).ready(function () {
-            $('#tablaMaterias').DataTable({
+            $('#tablaGrupos').DataTable({
                 pageLength: 5,
                 lengthMenu: [ [5, 10, 25, 50, -1], [5, 10, 25, 50, "Todos"] ],
                 language: {

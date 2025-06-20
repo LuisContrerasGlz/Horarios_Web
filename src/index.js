@@ -13,6 +13,7 @@ const loginRouter = require('./router/loginR');
 const manDocenteCotroller = require('./router/administrador/Docente/manDocenteR');
 const manMateriaCotroller = require('./router/administrador/materia/manMateriaR');
 const manAcademiaCotroller = require('./router/administrador/academia/manAcademiaR');
+const manGrupoCotroller = require('./router/administrador/grupo/manGrupoR');
 
 const app = express();
 const PORT = 3000;
@@ -59,6 +60,7 @@ app.use(express.static(__dirname + '/funciones'));
 app.use('/', manDocenteCotroller);
 app.use('/', manMateriaCotroller);
 app.use('/', manAcademiaCotroller);
+app.use('/', manGrupoCotroller);
 
 app.set('views', __dirname + '/views');
 app.engine('hbs', hbs.engine);

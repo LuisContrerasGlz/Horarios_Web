@@ -26,7 +26,8 @@ function manAcademia(req, res) {
                 console.log("Error al obtener status:", err);
                 return res.status(500).send("Error al obtener status");
             }
-            conn.query('SELECT id_academia, nombre_academia, nombre_corto,id_cct FROM academia where id_cct = ? ORDER BY nombre_academia', [req.session.idCt],(err, datos) => {
+            
+            conn.query('SELECT id_academia, nombre_academia, nombre_corto, id_status,status_academia FROM vista_academias where id_cct = ? ORDER BY nombre_academia', [req.session.idCt],(err, datos) => {
                 console.log("datos ", datos);
                 if (datos.length > 0) {                                            
                     res.render('usuarios/administrador/academia/manAcademia', { 
@@ -65,44 +66,38 @@ function ediAcademia(req, res) {
         }
 
         // Consulta todos los turnos
-        conn.query('SELECT id_academia, nombre, nombre_corto FROM academia', (err, academias) => {
-            if(err){
-                console.log(err);
-                return res.status(500).send("Error al obtener academias");
+        
+        conn.query('SELECT id_status, descripcion FROM status', (err, status) => {
+            if (err) {
+                console.log("Error al obtener status:", err);
+                return res.status(500).send("Error al obtener status");
             }
-            conn.query('SELECT id_status, descripcion FROM status', (err, status) => {
+            conn.query('SELECT id_academia, nombre_academia, nombre_corto, id_status,status_academia FROM vista_academias where id_cct = ? ORDER BY nombre_academia', [req.session.idCt],(err, academias) => {
                 if (err) {
-                    console.log("Error al obtener status:", err);
-                    return res.status(500).send("Error al obtener status");
+                    console.log("Error al obtener academias:", err);
+                    return res.status(500).send("Error al obtener academias");
                 }
-                conn.query('SELECT id_academia, nombre_academia, nombre_corto, semestre, especialidad, horas, tipo_semestre, id_academia,nombre_academia, academia_corto, id_status, status_academia,id_cct FROM vista_academias where id_cct = ? ORDER BY nombre_academia', [req.session.idCt],(err, academias) => {
-                    if (err) {
-                        console.log("Error al obtener academias:", err);
-                        return res.status(500).send("Error al obtener academias");
-                    }
-                    let academia = null;
-                    if (idAcademia) {
-                        academia = academias.find(d => d.id_academia == idAcademia);
-                    }
-                    console.log("academias ", academias);
-                    console.log("academias ", academias);
-                    console.log("idAcademia ", idAcademia);
-                    console.log("academia ", academia);
-                    res.render('usuarios/administrador/Academia/manAcademia', {
-                        datos: academias,
-                        academias: academias,
-                        status: status, 
-                        academia: academia, 
-                        modificar: idAcademia ? true : false, // Indica si se está editando un docente
-                        name: req.session.name,
-                        cct: req.session.idCt,
-                        tipoUsuario: 2,
-                        usuario: usuario,
-                        error: error
-                    });
+                let academia = null;
+                if (idAcademia) {
+                    academia = academias.find(d => d.id_academia == idAcademia);
+                }
+                console.log("academias ", academias);
+                console.log("academias ", academias);
+                console.log("idAcademia ", idAcademia);
+                console.log("academia ", academia);
+                res.render('usuarios/administrador/Academia/manAcademia', {
+                    datos: academias,
+                    status: status, 
+                    academia: academia, 
+                    modificar: idAcademia ? true : false, // Indica si se está editando un docente
+                    name: req.session.name,
+                    cct: req.session.idCt,
+                    tipoUsuario: 2,
+                    usuario: usuario,
+                    error: error
                 });
             });
-        });
+        });        
     });
 }
 
@@ -112,9 +107,6 @@ function manipulaAcademia(req, res){
         id_academia,
         nombre,
         nomcor,
-        semestre,
-        horas,
-        academia,
         status 
     } = req.body;
     const usuario = req.session.dataCampos;
@@ -130,8 +122,8 @@ function manipulaAcademia(req, res){
         // Verifica si se está editando o insertando
         if (id_academia) {
             // Editar academia existente
-            const sql = 'UPDATE academia SET nombre = ?, nombre_corto = ?, semestre = ?, especialidad = ?, horas = ?, tipo_semestre = ?, id_academia = ?, id_status = ? WHERE id_academia = ?';
-            conn.query(sql, [nombre, nomcor, semestre,"x", horas, "x", academia, status, id_academia ], (err) => {
+            const sql = 'UPDATE academia SET nombre_academia = ?, nombre_corto = ?, id_status = ? WHERE id_academia = ?';
+            conn.query(sql, [nombre, nomcor, status, id_academia ], (err) => {
                 if (err) {
                     console.log("Error al actualizar la academia:", err);
                     return res.status(500).send("Error al actualizar academia");
@@ -141,8 +133,8 @@ function manipulaAcademia(req, res){
             });
         } else {
             // Insertar nuevo docente
-            const sql = 'INSERT INTO academia (nombre, nombre_corto, semestre, especialidad, horas, tipo_semestre, id_academia, id_status, id_cct) VALUES (?, ?, ?, ?, ?, ?, ?, ?,?)';
-            const values = [nombre, nomcor, semestre, "x", horas, "X", academia, status,req.session.idCt];
+            const sql = 'INSERT INTO academia (nombre_academia, nombre_corto, id_status, id_cct) VALUES (?, ?, ?, ?)';
+            const values = [nombre, nomcor, status,req.session.idCt];
 
             // 👇 Aquí se imprime el query con los valores insertados
             console.log("Query a ejecutar:", mysql.format(sql, values));

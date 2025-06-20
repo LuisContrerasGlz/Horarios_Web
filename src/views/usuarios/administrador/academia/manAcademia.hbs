@@ -36,18 +36,14 @@
                     <tbody>
                         {{#each datos}}
                             <tr>
-                                <td>{{this.RFC}}</td>
-                                <td>{{this.Apellido_pat}}</td>
-                                <td>{{this.Apellido_mat}}</td>
-                                <td>{{this.Nombre}}</td>
-                                <td>{{this.correo_e}}</td>
-                                <td>{{this.Telefono}}</td>
-                                <td>{{this.turno}}</td>
-                                <td>{{this.status}}</td>
-                                <td class="px-4 py-2 bg-gray-100 border border-gray-600 text-center"><a href="/ediAcademia?id={{this.id_docente}}"><svg class="h-8 w-10 text-gray-600"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4" />  <line x1="13.5" y1="6.5" x2="17.5" y2="10.5" /></svg></a></td>
+                                <td>{{this.nombre_academia}}</td>
+                                <td>{{this.nombre_corto}}</td>
+                                <td>{{this.status_academia}}</td>
+
+                                <td class="px-4 py-2 bg-gray-100 border border-gray-600 text-center"><a href="/ediAcademia?id={{this.id_academia}}"><svg class="h-8 w-10 text-gray-600"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4" />  <line x1="13.5" y1="6.5" x2="17.5" y2="10.5" /></svg></a></td>
 
                                 <td class="px-4 py-2 bg-gray-100 border border-gray-600 text-center">
-                                <a href="/borAcademia?id={{this.id_docente}}" onclick="return confirm('¿Estás seguro de eliminar este docente?');">
+                                <a href="/borAcademia?id={{this.id_academia}}" onclick="return confirm('¿Estás seguro de eliminar esta academia?');">
                                     <svg class="h-8 w-10 text-red-600" width="24" height="24" viewBox="0 0 24 24"
                                         stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                     <path stroke="none" d="M0 0h24v24H0z" />
@@ -76,94 +72,25 @@
 
             <div class="mx-auto my-8 p-4 bg-white w-full sm:w-5/6 md:w-4/6 lg:w-2/3 xl:w-1/2 border rounded-lg shadow-lg">
                 <div class="card-body">
-                    <form action="/manipulaAcademia" method="POST" onsubmit="return telefonoValid() && correoValid()">
+                    <form action="/manipulaAcademia" method="POST">
+                        <input type="text" name="id_academia" id="id_academia" value="{{academia.id_academia}}" hidden>
                         <input type="text" name="id_cct" id="id_cct" value="{{cct}}" hidden>
-                        <input type="text" name="id_docente" id="id_docente" value="{{docente.id_docente}}" >
-                        <label for="rfc"><i class="fas fa-user"></i> RFC</label>
+
+                        <label for="nombre"><i class="fas fa-user"></i> Nombre de la academia</label>
                         <div class="relative">
                             {{#if modificar}}
-                                <input type="text" name="rfc" class="border border-gray-200 w-full text-lg placeholder-gray-500 p-2 my-2 focus:bg-white hover:bg-gray-300 pr-10" placeholder="RFC" id="rfc" pattern="[a-zA-Z0-9\s]+" title="Registro Federal de Causantes" value="{{docente.RFC}}" required>
+                                <input type="text" name="nombre" class="border border-gray-200 w-full text-lg placeholder-gray-500 p-2 my-2 focus:bg-white hover:bg-gray-300 pr-10" placeholder="Nombre" id="nombre" pattern="[a-zA-Z0-9\s]+" title="Registro Federal de Causantes" value="{{academia.nombre_academia}}" required>
                             {{else}}
-                                <input type="text" name="rfc" class="border border-gray-200 w-full text-lg placeholder-gray-500 p-2 my-2 focus:bg-white hover:bg-gray-300 pr-10" placeholder="RFC" id="rfc" pattern="[a-zA-Z0-9\s]+" title="Registro Federal de Causantes"  required>
+                                <input type="text" name="nombre" class="border border-gray-200 w-full text-lg placeholder-gray-500 p-2 my-2 focus:bg-white hover:bg-gray-300 pr-10" placeholder="Nombre" id="nombre" pattern="[a-zA-Z0-9\s]+" title="Nombre de la academia"  required>
                             {{/if}}  
                         </div>
                                 
-                        <label for="appat"><i class="fas fa-user"></i> Apellido paterno</label>
+                        <label for="nomcor"><i class="fas fa-user"></i> Nombre corto</label>
                         <div class="relative">
                             {{#if modificar}}
-                                <input type="text" name="appat" class="border border-gray-200 w-full text-lg placeholder-gray-500 p-2 my-2 focus:bg-white hover:bg-gray-300 pr-10" placeholder="Apellido Paterno" id="appat" pattern="[a-zA-Z0-9\s]+" title="No se permiten acentos ni caracteres especiales" value="{{docente.Apellido_pat}}" required>
+                                <input type="text" name="nomcor" class="border border-gray-200 w-full text-lg placeholder-gray-500 p-2 my-2 focus:bg-white hover:bg-gray-300 pr-10" placeholder="Nombre corto" id="nomcor" pattern="[a-zA-Z0-9\s]+" title="nombre corto" value="{{academia.nombre_corto}}" required>
                             {{else}}
-                                <input type="text" name="appat" class="border border-gray-200 w-full text-lg placeholder-gray-500 p-2 my-2 focus:bg-white hover:bg-gray-300 pr-10" placeholder="Apellido Paterno" id="appat" pattern="[a-zA-Z0-9\s]+" title="No se permiten acentos ni caracteres especiales" required>
-                            {{/if}}  
-                        </div>
-
-                        <label for="apmat"><i class="fas fa-user"></i> Apellido materno</label>
-                        <div class="relative">
-                            {{#if modificar}}
-                                <input type="text" name="apmat" class="border border-gray-200 w-full text-lg placeholder-gray-500 p-2 my-2 focus:bg-white hover:bg-gray-300 pr-10" placeholder="Apellido Materno" id="apmat" pattern="[a-zA-Z0-9\s]+" title="No se permiten acentos ni caracteres especiales" value="{{docente.Apellido_mat}}" required>
-                            {{else}}
-                                <input type="text" name="apmat" class="border border-gray-200 w-full text-lg placeholder-gray-500 p-2 my-2 focus:bg-white hover:bg-gray-300 pr-10" placeholder="Apellido Materno" id="apmat" pattern="[a-zA-Z0-9\s]+" title="No se permiten acentos ni caracteres especiales" required>
-                            {{/if}}  
-                        </div>                            
-
-                        <label for="nombre"><i class="fas fa-user"></i> Nombre</label>
-                        <div class="relative">
-                            {{#if modificar}}
-                                <input type="text" name="nombre" class="border border-gray-200 w-full text-lg placeholder-gray-500 p-2 my-2 focus:bg-white hover:bg-gray-300 pr-10" placeholder="Usuario" id="nombre" pattern="[a-zA-Z0-9\s]+" title="No se permiten acentos ni caracteres especiales" value="{{docente.Nombre}}" required>
-                            {{else}}
-                                <input type="text" name="nombre" class="border border-gray-200 w-full text-lg placeholder-gray-500 p-2 my-2 focus:bg-white hover:bg-gray-300 pr-10" placeholder="Usuario" id="nombre" pattern="[a-zA-Z0-9\s]+" title="No se permiten acentos ni caracteres especiales" required>
-                            {{/if}}  
-                        </div>
-
-                                
-                        <div class="form-group">
-                            <label for="correo_electronico"><i class="fas fa-envelope"></i> Correo Electrónico</label>
-                            <div class="relative">
-                                {{#if modificar}}
-                                    <input type="email" name="correo_electronico" class="border border-gray-200 w-full text-lg placeholder-gray-500 p-2 my-2 focus:bg-white hover:bg-gray-300 pr-10" placeholder="Correo electrónico" id="correo_electronico" value="{{docente.correo_e}}" required>
-                                {{else}}
-                                    <input type="email" name="correo_electronico" class="border border-gray-200 w-full text-lg placeholder-gray-500 p-2 my-2 focus:bg-white hover:bg-gray-300 pr-10" placeholder="Correo electrónico" id="correo_electronico" required>
-                                {{/if}}
-                            </div> 
-                            <small id="correoError" class="form-text text-danger text-red-600"></small>
-                        </div>
-                            
-                        <!-- Campo para ingresar el teléfono -->
-                        <div class="form-group">
-                            <label for="telefono"><i class="fas fa-phone"></i> Teléfono</label>
-                            <div class="relative">
-                                {{#if modificar}}
-                                    <input type="tel" name="telefono" class="border border-gray-200 w-full text-lg placeholder-gray-500 p-2 my-2 focus:bg-white hover:bg-gray-300 pr-10" id="telefono" placeholder="Teléfono (ej. 449 223 9955)" value="{{docente.Telefono}}" required>
-                                {{else}}
-                                    <input type="tel" name="telefono" class="border border-gray-200 w-full text-lg placeholder-gray-500 p-2 my-2 focus:bg-white hover:bg-gray-300 pr-10" id="telefono" placeholder="Teléfono (ej. 449 223 9955)" required>
-                                {{/if}}
-                            </div>    
-                            <small id="telefonoError" class="form-text text-danger text-red-600"></small>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="turno"><i class="fas fa-user"></i> Turno</label>
-                            <select id="turno" name="turno" class="border border-gray-200 w-full text-lg">
-                                {{#each turnos}}
-                                    {{#if ../modificar}}
-                                        {{#if (isEqualInt this.id_turno ../docente.id_turno)}}
-                                            <option value="{{this.id_turno}}" selected>{{this.descripcion}}</option>
-                                        {{else}}
-                                            <option value="{{this.id_turno}}">{{this.descripcion}}</option>
-                                        {{/if}}
-                                    {{else}}
-                                        <option value="{{this.id_turno}}">{{this.descripcion}}</option>
-                                    {{/if}}
-                                {{/each}}
-                            </select>
-                        </div>
-                        <br>
-                        <label for="perfil"><i class="fas fa-user"></i> Perfil</label>
-                        <div class="relative">
-                            {{#if modificar}}
-                                <input type="text" name="perfil" class="border border-gray-200 w-full text-lg placeholder-gray-500 p-2 my-2 focus:bg-white hover:bg-gray-300 pr-10" placeholder="Usuario" id="perfil" pattern="[a-zA-Z0-9\s]+" title="No se permiten acentos ni caracteres especiales" value="{{docente.perfil}}" required>
-                            {{else}}
-                                <input type="text" name="perfil" class="border border-gray-200 w-full text-lg placeholder-gray-500 p-2 my-2 focus:bg-white hover:bg-gray-300 pr-10" placeholder="Usuario" id="perfil" pattern="[a-zA-Z0-9\s]+" title="No se permiten acentos ni caracteres especiales" required>
+                                <input type="text" name="nomcor" class="border border-gray-200 w-full text-lg placeholder-gray-500 p-2 my-2 focus:bg-white hover:bg-gray-300 pr-10" placeholder="Nombre corto" id="nomcor" pattern="[a-zA-Z0-9\s]+" title="Nombre corto" required>
                             {{/if}}  
                         </div>
 
@@ -172,7 +99,7 @@
                             <select id="status" name="status" class="border border-gray-200 w-full text-lg">
                                 {{#each status}}
                                     {{#if ../modificar}}
-                                        {{#if (isEqualInt this.id_status ../docente.id_status)}}
+                                        {{#if (isEqualInt this.id_status ../academia.id_status)}}
                                             <option value="{{this.id_status}}" selected>{{this.descripcion}}</option>
                                         {{else}}
                                             <option value="{{this.id_status}}">{{this.descripcion}}</option>
